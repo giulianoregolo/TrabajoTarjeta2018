@@ -18,6 +18,7 @@ class Boleto implements BoletoInterface {
      * @return int
      */
     public function obtenerValor() {
+	    $this->valor = 14.80;
         return $this->valor;
     }
 
@@ -27,7 +28,7 @@ class Boleto implements BoletoInterface {
      * @return ColectivoInterface
      */
     public function obtenerColectivo() {
-
+        return $this->colectivo;
     }
 
 }
