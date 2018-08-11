@@ -18,7 +18,7 @@ class Boleto implements BoletoInterface {
      * @return int
      */
     public function obtenerValor() {
-	    $this->valor = 14.80;
+        $this->valor = 14.80;
         return $this->valor;
     }
 
