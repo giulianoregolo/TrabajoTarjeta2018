@@ -11,7 +11,7 @@ class TarjetaviajeplusTest extends TestCase {
      */
 	 public function testusarviajesplus(){
         $tarjeta = new Tarjeta;
-		$colectivo = new Colectivo;
+		$colectivo = new Colectivo(NULL,NULL,NULL);
 		$tarjeta->saldo = 0;
 
         $this->assertTrue($tarjeta->pagarTarjeta(14.80));
@@ -26,7 +26,7 @@ class TarjetaviajeplusTest extends TestCase {
      */
 	public function testnousarmasviajesplus(){
         $tarjeta = new Tarjeta;
-		$colectivo = new Colectivo;
+		$colectivo = new Colectivo(NULL,NULL,NULL);
 		$tarjeta->saldo = 0;
 
         $this->assertTrue($tarjeta->pagarTarjeta(14.80));
