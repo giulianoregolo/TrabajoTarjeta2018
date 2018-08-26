@@ -33,7 +33,7 @@ class Tarjeta implements TarjetaInterface {
       return $this->saldo;
     }
     
-    public function obtenerPlus() {
+    public function obetenerPlus() {
         return $this->viajesplus;
     }
     
