@@ -11,7 +11,7 @@ class DescuentodesaldoTest extends TestCase {
      */
      
     public function Descuentodeplus() {
-        $tarjeta = new Tarjeta;
+        $tarjeta = new Tarjeta();
         $tarjeta->saldo= 0.0;
         $tarjeta->viajesplus=0;
 
