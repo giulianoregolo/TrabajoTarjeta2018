@@ -32,6 +32,7 @@ class Colectivo implements ColectivoInterface {
             if ($tarjeta->obtenerSaldo() < 0){
                 $tarjeta->gastarPlus();
             }
+           return True; 
         }
     }
 
