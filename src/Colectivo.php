@@ -24,7 +24,7 @@ class Colectivo implements ColectivoInterface {
     }
 
     public function pagarCon(TarjetaInterface $tarjeta) {
-        if ($tarjeta->obetenerPlus() == 0){
+        if ($tarjeta->obtenerPlus() == 0){
             return False;
         }
         else{
