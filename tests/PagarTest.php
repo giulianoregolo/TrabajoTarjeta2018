@@ -7,9 +7,9 @@ use PHPUnit\Framework\TestCase;
 class PagarTest extends TestCase {
 
     /**
-     * Comprueba que la tarjeta aumenta su saldo cuando se carga saldo válido.
+     * Comprueba que la tarjeta pueda pagar con saldo.
      */
-    public function testCargaSaldo() {
+    public function testpagarmontoConsaldo() {
         $tarjeta = new Tarjeta;
 		$colectivo = new Colectivo;
 		$tarjeta->saldo = 14.80;
@@ -20,12 +20,14 @@ class PagarTest extends TestCase {
     }
 
     /**
-     * Comprueba que la tarjeta no puede cargar saldos invalidos.
+     * Comprueba que la tarjeta puede pagar sin saldo.
      */
-    public function testCargaSaldoInvalido() {
-      $tarjeta = new Tarjeta;
+    public function testpagarmontoSinsaldo() {
+        $tarjeta = new Tarjeta;
+		$colectivo = new Colectivo;
+		$tarjeta->saldo = 0;
 
-      $this->assertFalse($tarjeta->recargar(15));
-      $this->assertEquals($tarjeta->obtenerSaldo(), 0);
-  }
+        $this->assertTrue($tarjeta->viajeplus(14.80));
+        $this->assertEquals($colectivo->pagarCon , True);
+    }    
 }
