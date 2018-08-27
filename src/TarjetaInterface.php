@@ -21,5 +21,11 @@ interface TarjetaInterface {
      * @return float
      */
     public function obtenerSaldo();
+    
+    public function obetenerPlus();
+    
+    public function pagarTarjeta($monto);
+    
+    public function gastarPlus();
 
 }
