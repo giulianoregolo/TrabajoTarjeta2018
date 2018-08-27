@@ -37,8 +37,8 @@ class Tarjeta implements TarjetaInterface {
         return $this->viajesplus;
     }
     
-    public function pagarTarjeta($monto){
-        $this->saldo = $this->saldo - $monto;
+    public function pagarTarjeta($pasaje){
+        $this->saldo = $this->saldo - $pasaje;
     }
     
     public function gastarPlus(){
