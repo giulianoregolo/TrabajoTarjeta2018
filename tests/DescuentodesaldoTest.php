@@ -13,7 +13,7 @@ class DescuentodesaldoTest extends TestCase {
         $cole= new Colectivo(NULL,NULL,NULL);
         $boleto= new Boleto($cole,$tarjeta,$valor=29.60);
 
-        $this->assertEquals($colectivo->pagarCon($tarjeta), $boleto);
+        $this->assertEquals($cole->pagarCon($tarjeta), $boleto);
         $this->assertEquals($tarjeta->obtenerSaldo(),(100.0-29.60));
     } 
 }
