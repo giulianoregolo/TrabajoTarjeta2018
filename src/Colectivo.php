@@ -24,6 +24,7 @@ class Colectivo implements ColectivoInterface {
     }
 
     public function pagarCon(TarjetaInterface $tarjeta) {
+
         if ($tarjeta->obetenerPlus() == 0){
             return False;
         }
@@ -32,6 +33,7 @@ class Colectivo implements ColectivoInterface {
             if ($tarjeta->obtenerSaldo() < 0){
                 $tarjeta->gastarPlus();
             }
+            return True;
         }
     }
 

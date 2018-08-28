@@ -22,10 +22,18 @@ class Boleto implements BoletoInterface {
      * @return int
      */
     public function obtenerValor() {
-        $this->valor = 14.80;
-        return $this->valor;
+        switch ($caso){
+           case 0: 
+                $this->valor = 14.80;
+                break;
+           case 1: 
+                $this->valor = 7.40;
+                break;
+           case 2:
+                $this->calor = 0.0;
+                break;
+        }
     }
-
     /**
      * Devuelve un objeto que respresenta el colectivo donde se viajó.
      *

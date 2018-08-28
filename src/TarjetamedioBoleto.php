@@ -2,7 +2,7 @@
 
 namespace TrabajoTarjeta;
 
-class Tarjeta implements TarjetaInterface {
+class TarjetamedioBoleto implements TarjetaInterface {
     public $saldo;
     protected $viajesplus = 2;
     public function recargar($monto) {
@@ -38,7 +38,7 @@ class Tarjeta implements TarjetaInterface {
     }
     
     public function pagarTarjeta($pasaje){
-        $this->saldo = $this->saldo - $pasaje;
+        $this->saldo = $this->saldo - ($pasaje/2);
     }
     
     public function gastarPlus(){
