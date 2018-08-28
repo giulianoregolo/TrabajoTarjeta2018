@@ -10,7 +10,7 @@ class DescuentodesaldoTest extends TestCase {
      * Comprueba que se descuente los viajes plus del saldo.
      */
      
-    public function Descuentodeplus() {
+    public function testDescuentoDePlus() {
         $tarjeta = new Tarjeta();
         $tarjeta->saldo= 0.0;
         $tarjeta->viajesplus=0;
