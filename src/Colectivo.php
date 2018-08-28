@@ -24,16 +24,67 @@ class Colectivo implements ColectivoInterface {
     }
 
     public function pagarCon(TarjetaInterface $tarjeta) {
-
-        if ($tarjeta->obetenerPlus() == 0){
-            return False;
+        switch ($tarjeta->tipo){
+            case 0:
+                $valor = 14.80;
+            break;
+            case 1:
+                $valor = 7.40;
+            break;
+            case 2:
+                $valor = 0.0;
+            break;
+        }
+        if($tarjeta->saldo < $valor){
+            switch($tarjeta->viajesplus){
+                case 0:
+                    return false;
+                    break;
+                case 1:
+                    $tarjeta->gastarplus();
+                    $boleto = new Boleto($this,$tarjeta,14.80); 
+                    return $boleto;
+                    break;
+                case 2:
+                    $tarjeta->gastarplus();
+                    $boleto = new Boleto($this,$tarjeta,14.80); 
+                    return $boleto;
+                    break;
+            }
         }
         else{
-            $tarjeta->pagarTarjeta(14.80);
-            if ($tarjeta->obtenerSaldo() < 0){
-                $tarjeta->gastarPlus();
+            switch($tarjeta->viajesplus){
+                case 0:
+                    $valor= $valor+14.80+14.80;
+                    if($tarjeta->saldo < $valor){
+                        return false;
+                    }
+                    else{
+                        $tarjeta->pagarTarjeta($valor);
+                        $tarjeta->obtenerSaldo();
+                        $boleto=new Boleto($this,$tarjeta,$valor);
+                        return $boleto;
+                    }
+
+                case 1:
+                    $valor= $valor+14.80;
+                    if($tarjeta->saldo < $valor){
+                        return false;
+                    }
+                    else{
+                        $tarjeta->pagarTarjeta($valor);
+                        $tarjeta->obtenerSaldo();
+                        $boleto=new Boleto($this,$tarjeta,$valor);
+                        return $boleto;
+                    }
+                
+                case 2:
+                    $tarjeta->pagarTarjeta($valor);
+                    $tarjeta->obtenerSaldo();
+                    $boleto=new Boleto($this,$tarjeta,$valor);
+                    return $boleto;
+                    break;
             }
-            return True;
         }
     }
 

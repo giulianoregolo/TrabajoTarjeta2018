@@ -2,9 +2,8 @@
 
 namespace TrabajoTarjeta;
 
-class TarjetamedioBoleto implements TarjetaInterface {
-    public $saldo;
-    protected $viajesplus = 2;
+class TarjetamedioBoleto extends Tarjeta {
+    public $tipo =1;
     public function recargar($monto) {
 	  if($monto == 10.0 || $monto == 20.0 || $monto == 30.0 || $monto == 50.0 || $monto == 100.0 || $monto == 510.15 || $monto == 962.59)
 	  {
@@ -13,9 +12,6 @@ class TarjetamedioBoleto implements TarjetaInterface {
 		}
 		else {
 	   		$this->saldo = $this->saldo + $monto;
-		}
-		if($this->saldo > 0.0 || $monto > 10.0){
-			$this->viajesplus = 2;
 		} 
 		return True;	    
 	  }
@@ -38,7 +34,7 @@ class TarjetamedioBoleto implements TarjetaInterface {
     }
     
     public function pagarTarjeta($pasaje){
-        $this->saldo = $this->saldo - ($pasaje/2);
+        $this->saldo = $this->saldo - ($pasaje);
     }
     
     public function gastarPlus(){
