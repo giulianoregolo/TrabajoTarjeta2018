@@ -26,7 +26,7 @@ class PagarTest extends TestCase {
         $tarjeta = new Tarjeta;
 		$colectivo = new Colectivo(NULL,NULL,NULL);
 		$tarjeta->saldo = 0;
-
+        $boleto= new Boleto($colectivo,$tarjeta,$valor);
         $this->assertEquals($colectivo->pagarCon( $tarjeta), $boleto);
     }    
 }

@@ -10,7 +10,7 @@ class Boleto implements BoletoInterface {
     
     protected $tarjeta;
 
-    public function __construct($colectivo, $tarjeta, $valor = 14.80) {
+    public function __construct($colectivo, $tarjeta, $valor) {
         $this->valor = $valor;
         $this->colectivo = $colectivo;
         $this->tarjeta = $tarjeta;
@@ -22,18 +22,10 @@ class Boleto implements BoletoInterface {
      * @return int
      */
     public function obtenerValor() {
-        switch ($caso){
-           case 0: 
-                $this->valor = 14.80;
-                break;
-           case 1: 
-                $this->valor = 7.40;
-                break;
-           case 2:
-                $this->calor = 0.0;
-                break;
-        }
+        $this->valor = 14.80;
+        return $this->valor;
     }
+
     /**
      * Devuelve un objeto que respresenta el colectivo donde se viajó.
      *
