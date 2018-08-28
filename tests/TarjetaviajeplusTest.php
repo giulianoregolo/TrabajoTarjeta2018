@@ -13,7 +13,7 @@ class TarjetaviajeplusTest extends TestCase {
         $tarjeta = new Tarjeta;
 		$colectivo = new Colectivo(NULL,NULL,NULL);
         $tarjeta->saldo = 0;
-        $boleto= new Boleto($colectivo,$tarjeta,$valor);
+        $boleto= new Boleto($colectivo,$tarjeta,$valor=14.80);
 
         $this->assertEquals($colectivo->pagarCon($tarjeta), $boleto);
 
@@ -26,7 +26,8 @@ class TarjetaviajeplusTest extends TestCase {
 	public function testnousarmasviajesplus(){
         $tarjeta = new Tarjeta;
 		$colectivo = new Colectivo(NULL,NULL,NULL);
-		$tarjeta->saldo = 0;
+        $tarjeta->saldo = 0;
+        $boleto= new Boleto($colectivo,$tarjeta,$valor=14.80);
 
         $this->assertEquals($colectivo->pagarCon($tarjeta), $boleto);
 
