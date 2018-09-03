@@ -90,4 +90,8 @@ class Tarjeta implements TarjetaInterface {
         $this->viajesplus = $this->viajesplus - 1;
     }
     
+    public function obtenervalor(){
+        return $this->valor; 
+    
+    }
 }

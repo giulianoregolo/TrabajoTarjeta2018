@@ -13,8 +13,7 @@ class PagarTest extends TestCase {
         $tarjeta = new Tarjeta;
         $colectivo = new Colectivo(NULL,NULL,NULL);
         $boleto= new Boleto($colectivo,$tarjeta,$valor=14.80);
-        $tarjeta->saldo = 14.80;
-        $tarjeta->recargar(100.0);
+        $tarjeta->recargar(14.80);
         $this->assertEquals($colectivo->pagarCon( $tarjeta), $boleto);
 
     }
