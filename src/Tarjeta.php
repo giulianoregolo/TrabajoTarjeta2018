@@ -60,7 +60,7 @@ class Tarjeta implements TarjetaInterface {
                         return false;
                     }
                     else{
-                        $this->pagarTarjeta();
+                        $this->saldo = $this->saldo - $this->valor;
                         $this->obtenerSaldo();
                         return true;
                     }
@@ -71,13 +71,13 @@ class Tarjeta implements TarjetaInterface {
                         return false;
                     }
                     else{
-                        $this->pagarTarjeta();
+                        $this->saldo = $this->saldo - $this->valor;
                         $this->obtenerSaldo();
                         return true;
                     }
                 
                 case 2:
-                    $this->pagarTarjeta();
+                    $this->saldo = $this->saldo - $this->valor;
                     $this->obtenerSaldo();
                     return true;
                     break;
