@@ -13,38 +13,36 @@ class PagarTest extends TestCase {
         $tarjeta = new Tarjeta;
         $medioboleto = new TarjetamedioBoleto;
         $colectivo = new Colectivo(NULL,NULL,NULL);
-        $tarjeta->recargar(14.80);
-        $medioboleto->recargar(7.40);
-        $this->assertEquals($colectivo->pagarCon( $tarjeta), $colectivo->pagarCon( $medioboleto));
+        $medioboleto->recargar(50.0);
+        $boleto= new Boleto($colectivo,$medioboleto,$valor=42.6);
+        $this->assertEquals($colectivo->pagarCon($medioboleto), $boleto);
+        $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-7.40));
     }
     
     /**
      * Comprueba que el medio boleto page la mitad que una tarjeta normal en un pago con un viaje plus acumulado
      */
     public function testpagarmontoviajeplusSimple() {
-        $tarjeta = new Tarjeta;
         $medioboleto = new TarjetamedioBoleto;
         $colectivo = new Colectivo(NULL,NULL,NULL);
-        $tarjeta->recargar(29.60);
-        $medioboleto->recargar(22.20);
-        $tarjeta->gastarPlus();
+        $medioboleto->recargar(50.0);
+        $boleto= new Boleto($colectivo,$medioboleto,$valor=27.8);
         $medioboleto->gastarPlus();
-        $this->assertEquals($colectivo->pagarCon( $tarjeta), $colectivo->pagarCon( $medioboleto));
+        $this->assertEquals($colectivo->pagarCon($medioboleto), $boleto);
+        $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-22.2));
     }
     
     /**
      * Comprueba que el medio boleto page la mitad que una tarjeta normal en un pago con dos viajes plus acumulados
      */
     public function testpagarmontoviajeplusDoble() {
-        $tarjeta = new Tarjeta;
         $medioboleto = new TarjetamedioBoleto;
         $colectivo = new Colectivo(NULL,NULL,NULL);
-        $tarjeta->recargar(44.40);
-        $medioboleto->recargar(37.0);
-        $tarjeta->gastarPlus();
-        $tarjeta->gastarPlus();
+        $medioboleto->recargar(50.0);
+        $boleto= new Boleto($colectivo,$medioboleto,$valor=13.0);
         $medioboleto->gastarPlus();
         $medioboleto->gastarPlus();
-        $this->assertEquals($colectivo->pagarCon( $tarjeta), $colectivo->pagarCon( $medioboleto));
+        $this->assertEquals($colectivo->pagarCon($medioboleto), $boleto);
+        $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-37.0));
     }
 }
