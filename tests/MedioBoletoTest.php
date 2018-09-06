@@ -25,10 +25,10 @@ class PagarTest extends TestCase {
         $tarjeta = new Tarjeta;
         $medioboleto = new TarjetamedioBoleto;
         $colectivo = new Colectivo(NULL,NULL,NULL);
-        $colectivo->pagarCon($tarjeta);
-        $colectivo->pagarCon($medioboleto);
         $tarjeta->recargar(29.60);
-        $medioboleto->recargar(14.80);
+        $medioboleto->recargar(22.20);
+        $tarjeta->gastarPlus();
+        $medioboleto->gastarPlus();
         $this->assertEquals($colectivo->pagarCon( $tarjeta), $colectivo->pagarCon( $medioboleto));
     }
     
@@ -39,12 +39,12 @@ class PagarTest extends TestCase {
         $tarjeta = new Tarjeta;
         $medioboleto = new TarjetamedioBoleto;
         $colectivo = new Colectivo(NULL,NULL,NULL);
-        $colectivo->pagarCon($tarjeta);
-        $colectivo->pagarCon($tarjeta);
-        $colectivo->pagarCon($medioboleto);
-        $colectivo->pagarCon($medioboleto);
         $tarjeta->recargar(44.40);
-        $medioboleto->recargar(22,20);
+        $medioboleto->recargar(37.0);
+        $tarjeta->gastarPlus();
+        $tarjeta->gastarPlus();
+        $medioboleto->gastarPlus();
+        $medioboleto->gastarPlus();
         $this->assertEquals($colectivo->pagarCon( $tarjeta), $colectivo->pagarCon( $medioboleto));
     }
 }
