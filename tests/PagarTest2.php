@@ -4,7 +4,7 @@ namespace TrabajoTarjeta;
 
 use PHPUnit\Framework\TestCase;
 
-class PagarTest extends TestCase {
+class PagarTest2 extends TestCase {
 
     /**
      * Comprueba que la tarjeta pueda pagar con saldo.
