@@ -10,11 +10,10 @@ class PagarTest extends TestCase {
      * Comprueba que el medio boleto page la mitad que una tarjeta normal en un pago estandar.
      */
     public function testpagarmontoEstandar() {
-        $tarjeta = new Tarjeta;
         $medioboleto = new TarjetamedioBoleto;
         $colectivo = new Colectivo(NULL,NULL,NULL);
         $medioboleto->recargar(50.0);
-        $boleto= new Boleto($colectivo,$medioboleto,$valor=42.6);
+        $boleto= new Boleto($colectivo,$medioboleto,$valor=7.40);
         $this->assertEquals($colectivo->pagarCon($medioboleto), $boleto);
         $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-7.40));
     }
@@ -26,7 +25,7 @@ class PagarTest extends TestCase {
         $medioboleto = new TarjetamedioBoleto;
         $colectivo = new Colectivo(NULL,NULL,NULL);
         $medioboleto->recargar(50.0);
-        $boleto= new Boleto($colectivo,$medioboleto,$valor=27.8);
+        $boleto= new Boleto($colectivo,$medioboleto,$valor=22.2);
         $medioboleto->gastarPlus();
         $this->assertEquals($colectivo->pagarCon($medioboleto), $boleto);
         $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-22.2));
@@ -39,7 +38,7 @@ class PagarTest extends TestCase {
         $medioboleto = new TarjetamedioBoleto;
         $colectivo = new Colectivo(NULL,NULL,NULL);
         $medioboleto->recargar(50.0);
-        $boleto= new Boleto($colectivo,$medioboleto,$valor=13.0);
+        $boleto= new Boleto($colectivo,$medioboleto,$valor=37.0);
         $medioboleto->gastarPlus();
         $medioboleto->gastarPlus();
         $this->assertEquals($colectivo->pagarCon($medioboleto), $boleto);
