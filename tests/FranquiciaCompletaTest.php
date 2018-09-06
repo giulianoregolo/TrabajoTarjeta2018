@@ -14,7 +14,7 @@ class FranquiciaCompletaTest extends TestCase {
         $colectivo = new Colectivo(NULL,NULL,NULL);
         $boleto= new Boleto($colectivo,$fCompleta,$valor=0.0);
         $this->assertEquals($colectivo->pagarCon($fCompleta), $boleto);
-        $this->assertEquals($$fCompleta->obtenerSaldo(),(0.0));
+        $this->assertEquals($fCompleta->obtenerSaldo(),(0.0));
     }
     
 }
