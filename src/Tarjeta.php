@@ -52,7 +52,7 @@ class Tarjeta implements TarjetaInterface {
         else{
             switch($this->viajesplus){
                 case 0:
-                    $costo = $this->valor+14.80+14.80;
+                    $costo = $this->valor * 3;
                     if($this->saldo < $costo){
                         return false;
                     }
@@ -63,7 +63,7 @@ class Tarjeta implements TarjetaInterface {
                     }
 
                 case 1:
-                    $costo = $this->valor+14.80;
+                    $costo = $this->valor * 2;
                     if($this->saldo < $costo){
                         return false;
                     }
