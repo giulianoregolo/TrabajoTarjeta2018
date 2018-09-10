@@ -27,7 +27,7 @@ class Colectivo implements ColectivoInterface {
         if(!$tarjeta->pagarTarjeta()) {
             return false;
         }
-        return new Boleto($this,$tarjeta,$tarjeta->obtenervalor());
+        return new Boleto($this,$tarjeta,$tarjeta->obtenerCosto());
     }
 
 }

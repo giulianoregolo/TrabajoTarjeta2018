@@ -83,6 +83,17 @@ class Tarjeta implements TarjetaInterface {
     
     }
     
+    public function obtenerCosto(){
+        switch($this->viajesplus){
+            case 0:
+                return ($this->valor * 3);
+            case 1:
+                return ($this->valor * 2);
+            case 2:
+                return $this->valor;
+        }
+    }
+    
     public function gastarPlus(){
         $this->viajesplus = $this->viajesplus - 1;
     }
