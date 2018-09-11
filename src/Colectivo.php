@@ -27,7 +27,14 @@ class Colectivo implements ColectivoInterface {
         if(!$tarjeta->pagarTarjeta()) {
             return false;
         }
-        return new Boleto($this,$tarjeta,$tarjeta->obtenerCosto());
+        switch($tarjeta->caso){
+            case "Normal":
+                return new Boleto($tarjeta->obtenerCosto(),time(),$tarjeta->obtenerId(),$tarjeta->tipo,$tarjeta->obtenerSaldo(),$this->linea);
+            case "viajeplus":
+                return new BoletoPlus($this->linea,time(),$tarjeta->obtenerCosto(),$tarjeta->obtenerId(),$tarjeta->obtenerSaldo());
+            case "pagandoPlus":
+            return new BoletoPagandoPlus($this->linea,time(),$tarjeta->obtenerCosto(),$tarjeta->obtenerId(),$tarjeta->obtenerSaldo(),$tarjeta->obtenerostoCostoPlus(),$tarjeta->obtenervalor());
+        }
     }
 
 }

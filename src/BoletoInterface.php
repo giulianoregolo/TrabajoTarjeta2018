@@ -16,11 +16,9 @@ interface BoletoInterface {
      *
      * @return ColectivoInterface
      */
-    public function obtenerColectivo();
+    public function obtenerlinea();
 
     public function obtenerTarjetaId();
-
-    public function obtenerCostoplus();
 
     public function obtenersaldo();
 
@@ -28,5 +26,4 @@ interface BoletoInterface {
 
     public function obtenerhora();
 
-    
 }

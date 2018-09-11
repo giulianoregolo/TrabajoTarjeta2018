@@ -9,6 +9,7 @@ class Tarjeta implements TarjetaInterface {
     protected $costo;
     protected $id;
     protected $costoPlus = 0.0;
+    public $caso;
     public function recargar($monto) {
 	  if($monto == 10.0 || $monto == 20.0 || $monto == 30.0 || $monto == 50.0 || $monto == 100.0 || $monto == 510.15 || $monto == 962.59)
 	  {
@@ -47,10 +48,12 @@ class Tarjeta implements TarjetaInterface {
                 case 1:
                     $this->gastarplus();
                     $this->costo = 0.0;
+                    $this->caso = "viajeplus";
                     return true;
                 case 2:
                     $this->gastarplus();
                     $this->costo = 0.0;
+                    $this->caso = "viajeplus";
                     return true;
             }
         }
@@ -65,6 +68,7 @@ class Tarjeta implements TarjetaInterface {
                     else{
                         $this->saldo = $this->saldo - $this->costo;
                         $this->obtenerSaldo();
+                        $this->caso = "pagandoPlus";
                         return true;
                     }
 
@@ -77,12 +81,14 @@ class Tarjeta implements TarjetaInterface {
                     else{
                         $this->saldo = $this->saldo - $this->costo;
                         $this->obtenerSaldo();
+                        $this->caso = "pagandoPlus";
                         return true;
                     }
                 
                 case 2:
                     $this->costo = $this->valor;
                     $this->saldo = $this->saldo - $this->costo;
+                    $this->caso = "Normal";
                     $this->obtenerSaldo();
                     return true;
             }
