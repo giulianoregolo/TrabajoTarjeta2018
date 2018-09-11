@@ -6,6 +6,9 @@ class Tarjeta implements TarjetaInterface {
     protected $saldo = 0;
     protected $viajesplus = 2;
     protected $valor = 14.80;
+    protected $costo;
+    protected $id;
+    protected $costoPlus = 0.0;
     public function recargar($monto) {
 	  if($monto == 10.0 || $monto == 20.0 || $monto == 30.0 || $monto == 50.0 || $monto == 100.0 || $monto == 510.15 || $monto == 962.59)
 	  {
@@ -43,39 +46,43 @@ class Tarjeta implements TarjetaInterface {
                     return false;
                 case 1:
                     $this->gastarplus();
+                    $this->costo = 0.0;
                     return true;
                 case 2:
                     $this->gastarplus();
+                    $this->costo = 0.0;
                     return true;
             }
         }
         else{
             switch($this->viajesplus){
                 case 0:
-                    $costo = $this->valor * 3;
-                    if($this->saldo < $costo){
+                    $this->costoPlus = 14.80*2;
+                    $this->costo = $this->valor + $this->costoPlus ;
+                    if($this->saldo < $this->costo){
                         return false;
                     }
                     else{
-                        $this->saldo = $this->saldo - $costo;
+                        $this->saldo = $this->saldo - $this->costo;
                         $this->obtenerSaldo();
                         return true;
                     }
 
                 case 1:
-                    $costo = $this->valor * 2;
-                    if($this->saldo < $costo){
+                    $this->costoPlus = 14.80;
+                    $this->costo = $this->valor + $this->costoPlus;
+                    if($this->saldo < $this->costo){
                         return false;
                     }
                     else{
-                        $this->saldo = $this->saldo - $costo;
+                        $this->saldo = $this->saldo - $this->costo;
                         $this->obtenerSaldo();
                         return true;
                     }
                 
                 case 2:
-                    $costo = $this->valor;
-                    $this->saldo = $this->saldo - $costo;
+                    $this->costo = $this->valor;
+                    $this->saldo = $this->saldo - $this->costo;
                     $this->obtenerSaldo();
                     return true;
             }
@@ -84,14 +91,8 @@ class Tarjeta implements TarjetaInterface {
     }
     
     public function obtenerCosto(){
-        switch($this->viajesplus){
-            case 0:
-                return ($this->valor * 3);
-            case 1:
-                return ($this->valor * 2);
-            case 2:
-                return $this->valor;
-        }
+        return $this->costo;
+        
     }
     
     public function gastarPlus(){
@@ -100,6 +101,13 @@ class Tarjeta implements TarjetaInterface {
     
     public function obtenervalor(){
         return $this->valor; 
-    
+    }
+
+    public function obtenerId(){
+        return $this->id;
+    }
+
+    public function obtenerCostoPlus(){
+        return $this->costoPlus;
     }
 }

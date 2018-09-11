@@ -18,4 +18,15 @@ interface BoletoInterface {
      */
     public function obtenerColectivo();
 
+    public function obtenerTarjetaId();
+
+    public function obtenerCostoplus();
+
+    public function obtenersaldo();
+
+    public function obtenertipoTarjeta();
+
+    public function obtenerhora();
+
+    
 }

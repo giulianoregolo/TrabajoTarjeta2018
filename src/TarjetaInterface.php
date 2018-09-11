@@ -32,4 +32,8 @@ interface TarjetaInterface {
     
     public function obtenerCosto();
 
+    public function obtenerId();
+
+    public function obtenerCostoPlus();
+
 }
