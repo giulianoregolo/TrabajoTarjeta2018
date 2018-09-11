@@ -26,11 +26,6 @@ class Boleto implements BoletoInterface {
         return $this->valor;
     }
 
-    /**
-     * Devuelve un objeto que respresenta el colectivo donde se viajó.
-     *
-     * @return ColectivoInterface
-     */
     public function obtenerColectivo() {
         return $this->colectivo;
     }
