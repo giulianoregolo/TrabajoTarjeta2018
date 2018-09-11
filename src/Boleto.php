@@ -26,8 +26,4 @@ class Boleto implements BoletoInterface {
         return $this->valor;
     }
 
-    public function obtenerColectivo() {
-        return $this->colectivo;
-    }
-
 }
