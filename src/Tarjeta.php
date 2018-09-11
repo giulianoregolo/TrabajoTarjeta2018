@@ -49,7 +49,6 @@ class Tarjeta implements TarjetaInterface {
                 case 2:
                     $this->gastarplus();
                     return true;
-                    break;
             }
         }
         else{
@@ -79,8 +78,7 @@ class Tarjeta implements TarjetaInterface {
                 case 2:
                     $this->saldo = $this->saldo - $this->valor;
                     $this->obtenerSaldo();
-                    return true;
-                    break;
+                    return true;                  
             }
         }
     
