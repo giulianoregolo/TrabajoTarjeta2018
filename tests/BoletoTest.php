@@ -7,8 +7,9 @@ use PHPUnit\Framework\TestCase;
 class BoletoTest extends TestCase {
 
     public function testSaldoCero() {
-        $valor = 14.80;
-        $boleto = new Boleto($valor, NULL, NULL);
+        $tarjeta = new Tarjeta;
+        $valor=14.80;
+        $boleto = new Boleto(NULL,$tarjeta);
 
         $this->assertEquals($boleto->obtenerValor(), $valor);
     }

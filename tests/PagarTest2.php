@@ -12,7 +12,7 @@ class PagarTest2 extends TestCase {
     public function testpagarmontoConsaldo() {
         $tarjeta = new Tarjeta;
         $colectivo = new Colectivo(NULL,NULL,NULL);
-        $boleto= new Boleto($colectivo,$tarjeta,$valor=14.80);
+        $boleto= new Boleto($colectivo,$tarjeta);
         $tarjeta->recargar(14.80);
         $this->assertEquals($colectivo->pagarCon( $tarjeta), $boleto);
 
@@ -24,7 +24,7 @@ class PagarTest2 extends TestCase {
     public function testpagarmontoSinsaldo() {
         $tarjeta = new Tarjeta;
 		$colectivo = new Colectivo(NULL,NULL,NULL);
-        $boleto= new Boleto($colectivo,$tarjeta,$valor=14.80);
+        $boleto= new Boleto($colectivo,$tarjeta);
         $this->assertEquals($colectivo->pagarCon( $tarjeta), $boleto);
     }    
 }
