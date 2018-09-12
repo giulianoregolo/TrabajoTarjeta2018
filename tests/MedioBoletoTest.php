@@ -11,7 +11,7 @@ class MedioBoletoTest extends TestCase {
      */
     public function testpagarmontoEstandar() {
         $medioboleto = new TarjetamedioBoleto;
-        $colectivo = new Colectivo(NULL,NULL,NULL);
+        $colectivo = new Colectivo("mixta","133",420);
         $medioboleto->recargar(50.0);
         $boleto= new Boleto($colectivo,$medioboleto);
         $this->assertEquals($colectivo->pagarCon($medioboleto), $boleto);
@@ -23,7 +23,7 @@ class MedioBoletoTest extends TestCase {
      */
     public function testpagarmontoviajeplusSimple() {
         $medioboleto = new TarjetamedioBoleto;
-        $colectivo = new Colectivo(NULL,NULL,NULL);
+        $colectivo = new Colectivo("mixta","133",420);
         $medioboleto->recargar(50.0);
         $boleto= new Boleto($colectivo,$medioboleto);
         $medioboleto->gastarPlus();
@@ -36,7 +36,7 @@ class MedioBoletoTest extends TestCase {
      */
     public function testpagarmontoviajeplusDoble() {
         $medioboleto = new TarjetamedioBoleto;
-        $colectivo = new Colectivo(NULL,NULL,NULL);
+        $colectivo = new Colectivo("mixta","133",420);
         $medioboleto->recargar(50.0);
         $boleto= new Boleto($colectivo,$medioboleto);
         $medioboleto->gastarPlus();
