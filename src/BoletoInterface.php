@@ -19,7 +19,7 @@ interface BoletoInterface {
 
     public function obtenertipoTarjeta();
 
-    public function obtenerhora();
+    //public function obtenerhora();
 
     public function obtenerCostoTotal();
 
