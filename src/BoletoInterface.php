@@ -11,11 +11,6 @@ interface BoletoInterface {
      */
     public function obtenerValor();
 
-    /**
-     * Devuelve un objeto que respresenta el colectivo donde se viajó.
-     *
-     * @return ColectivoInterface
-     */
     public function obtenerlinea();
 
     public function obtenerTarjetaId();
@@ -26,4 +21,7 @@ interface BoletoInterface {
 
     public function obtenerhora();
 
+    public function obtenerCostoTotal();
+
+    public function obtenerTipoBoleto();
 }

@@ -8,7 +8,7 @@ class Tarjeta implements TarjetaInterface {
     protected $valor = 14.80;
     protected $costo;
     protected $id;
-    protected $costoPlus = 0.0;
+    protected $tipo = "Normal";
     public $caso;
     public function recargar($monto) {
 	  if($monto == 10.0 || $monto == 20.0 || $monto == 30.0 || $monto == 50.0 || $monto == 100.0 || $monto == 510.15 || $monto == 962.59)
@@ -115,5 +115,9 @@ class Tarjeta implements TarjetaInterface {
 
     public function obtenerCostoPlus(){
         return $this->costoPlus;
+    }
+
+    public function obtenerTipo():string{
+        return $this->tipo;
     }
 }

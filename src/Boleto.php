@@ -12,24 +12,29 @@ class Boleto implements BoletoInterface {
 
     protected $tipoTarjeta;
 
+    protected $costoTotal;
+
     protected $linea;
 
     protected $saldo;
 
-    public function __construct($valor, $hora, $id, $tipoTarjeta, $saldo, $linea ) {
-        $this->valor = $valor;
-        $this->hora = $hora;
-        $this->id = $id;
-        $this->tipoTarjeta= $tipoTarjeta;
-        $this->linea = $linea; 
-        $this->saldo= $saldo;
+    protected $cantViajesplus;
+
+    protected $tipoBoleto;
+
+
+    public function __construct($tarjeta,$colectivo) {
+        $this->valor = $tarjeta->obtenervalor();
+        $this->hora = $colectivo->obtenerhora();
+        $this->id = $tarjeta->obtenerId();
+        $this->tipoTarjeta = $tarjeta->obtenerTipo();
+        $this->linea = $colectivo->linea();
+        $this->saldo = $tarjeta->obtenerSaldo();
+        $this->canViajesplus = $tarjeta->obtenerPlus();
+        $this->costoTotal = $tarjeta->obtenerCostoPlus();
+        $this->tipoBoleto = $tarjeta->caso;
     }
 
-    /**
-     * Devuelve el valor del boleto.
-     *
-     * @return int
-     */
     public function obtenerValor() {
         return $this->valor;
     }
@@ -54,4 +59,11 @@ class Boleto implements BoletoInterface {
         return $this->hora;
     }
 
+    public function obtenerCostoTotal(){
+        return $this->costoTotal;
+    }
+
+    public function obtenerTipoBoleto(){
+        return $this->tipoBoleto;
+    } 
 }
