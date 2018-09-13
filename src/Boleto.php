@@ -69,4 +69,5 @@ class Boleto implements BoletoInterface {
     public function obtenerCostoPlus(){
         return (14.8 * $this->canViajesplus);
     }
+
 }

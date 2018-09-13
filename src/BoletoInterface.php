@@ -11,6 +11,7 @@ interface BoletoInterface {
      */
     public function obtenerValor();
 
+
     public function obtenerlinea();
 
     public function obtenerTarjetaId();

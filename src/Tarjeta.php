@@ -92,6 +92,7 @@ class Tarjeta implements TarjetaInterface {
                     $this->caso = "Normal";
                     $this->obtenerSaldo();
                     return true;
+
             }
         }
     
