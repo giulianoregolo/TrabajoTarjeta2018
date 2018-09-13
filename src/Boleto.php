@@ -6,7 +6,7 @@ class Boleto implements BoletoInterface {
 
     protected $valor;
 
-    protected $hora;
+  //  protected $hora;
 
     protected $id;
 

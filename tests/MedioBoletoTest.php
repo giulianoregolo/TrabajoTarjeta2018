@@ -13,8 +13,7 @@ class MedioBoletoTest extends TestCase {
         $medioboleto = new TarjetamedioBoleto;
         $colectivo = new Colectivo("mixta","133",420);
         $medioboleto->recargar(50.0);
-        $boleto= new Boleto($colectivo,$medioboleto);
-        $this->assertEquals($colectivo->pagarCon($medioboleto), $boleto);
+        $this->assertEquals($colectivo->pagarCon($medioboleto), new Boleto($colectivo,$medioboleto));
         $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-7.40));
     }
     
