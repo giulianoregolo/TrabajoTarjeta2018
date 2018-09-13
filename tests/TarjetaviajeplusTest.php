@@ -12,11 +12,10 @@ class TarjetaviajeplusTest extends TestCase {
 	 public function testusarviajesplus(){
         $tarjeta = new Tarjeta;
 		$colectivo = new Colectivo("mixta","103",420);
-        $boleto= new Boleto($colectivo,$tarjeta);
 
-        $this->assertEquals($colectivo->pagarCon($tarjeta), $boleto);
+        $this->assertEquals($colectivo->pagarCon($tarjeta), new Boleto($colectivo,$tarjeta));
 
-        $this->assertEquals($colectivo->pagarCon($tarjeta), $boleto);
+        $this->assertEquals($colectivo->pagarCon($tarjeta), new Boleto($colectivo,$tarjeta));
 
 	 }
 	/**
@@ -25,11 +24,10 @@ class TarjetaviajeplusTest extends TestCase {
 	public function testnousarmasviajesplus(){
         $tarjeta = new Tarjeta;
 		$colectivo = new Colectivo("mixta","103",420);
-        $boleto= new Boleto($colectivo,$tarjeta);
 
-        $this->assertEquals($colectivo->pagarCon($tarjeta), $boleto);
+        $this->assertEquals($colectivo->pagarCon($tarjeta), new Boleto($colectivo,$tarjeta));
 
-        $this->assertEquals($colectivo->pagarCon($tarjeta), $boleto);
+        $this->assertEquals($colectivo->pagarCon($tarjeta), new Boleto($colectivo,$tarjeta));
 
         $this->assertEquals($colectivo->pagarCon($tarjeta), False);
 
