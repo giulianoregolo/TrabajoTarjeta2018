@@ -24,4 +24,6 @@ interface BoletoInterface {
     public function obtenerCostoTotal();
 
     public function obtenerTipoBoleto();
+    
+    public function obtenerCostoPlus();
 }
