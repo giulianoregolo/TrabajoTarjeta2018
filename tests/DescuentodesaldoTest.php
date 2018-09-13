@@ -8,7 +8,7 @@ class DescuentodesaldoTest extends TestCase {
      
     public function testDescuentoDeUnPlus() {
         $tarjeta = new Tarjeta();
-        $cole= new Colectivo(NULL,NULL,NULL);
+        $cole= new Colectivo("mixta","103",420);
         $boleto= new Boleto($cole,$tarjeta);
         $tarjeta->recargar(100.0);
         $tarjeta->gastarPlus();
