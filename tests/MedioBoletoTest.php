@@ -11,10 +11,9 @@ class MedioBoletoTest extends TestCase {
      */
     public function testpagarmontoEstandar() {
         $medioboleto = new TarjetamedioBoleto;
-        $colectivo = new Colectivo(NULL,NULL,NULL);
+        $colectivo = new Colectivo("mixta","133",420);
         $medioboleto->recargar(50.0);
-        $boleto= new Boleto($colectivo,$medioboleto,$valor=7.40);
-        $this->assertEquals($colectivo->pagarCon($medioboleto), $boleto);
+        $this->assertEquals($colectivo->pagarCon($medioboleto), new Boleto($colectivo,$medioboleto));
         $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-7.40));
     }
     
@@ -23,11 +22,10 @@ class MedioBoletoTest extends TestCase {
      */
     public function testpagarmontoviajeplusSimple() {
         $medioboleto = new TarjetamedioBoleto;
-        $colectivo = new Colectivo(NULL,NULL,NULL);
+        $colectivo = new Colectivo("mixta","133",420);
         $medioboleto->recargar(50.0);
-        $boleto= new Boleto($colectivo,$medioboleto,$valor=22.2);
         $medioboleto->gastarPlus();
-        $this->assertEquals($colectivo->pagarCon($medioboleto), $boleto);
+        $this->assertEquals($colectivo->pagarCon($medioboleto), new Boleto($colectivo,$medioboleto));
         $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-22.2));
     }
     
@@ -36,12 +34,11 @@ class MedioBoletoTest extends TestCase {
      */
     public function testpagarmontoviajeplusDoble() {
         $medioboleto = new TarjetamedioBoleto;
-        $colectivo = new Colectivo(NULL,NULL,NULL);
+        $colectivo = new Colectivo("mixta","133",420);
         $medioboleto->recargar(50.0);
-        $boleto= new Boleto($colectivo,$medioboleto,$valor=37.0);
         $medioboleto->gastarPlus();
         $medioboleto->gastarPlus();
-        $this->assertEquals($colectivo->pagarCon($medioboleto), $boleto);
+        $this->assertEquals($colectivo->pagarCon($medioboleto), new Boleto($colectivo,$medioboleto));
         $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-37.0));
     }
 }

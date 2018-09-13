@@ -11,9 +11,8 @@ class FranquiciaCompletaTest extends TestCase {
      */
     public function testpagarmontoestandar() {
         $fCompleta = new TarjetaFranquiciaCompleta;
-        $colectivo = new Colectivo(NULL,NULL,NULL);
-        $boleto= new Boleto($colectivo,$fCompleta,$valor=0.0);
-        $this->assertEquals($colectivo->pagarCon($fCompleta), $boleto);
+        $colectivo = new Colectivo("mixta","103",420);
+        $this->assertEquals($colectivo->pagarCon($fCompleta), new Boleto($colectivo,$fCompleta));
         $this->assertEquals($fCompleta->obtenerSaldo(),(0.0));
     }
     
