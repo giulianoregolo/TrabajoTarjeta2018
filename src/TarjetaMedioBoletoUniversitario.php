@@ -12,7 +12,7 @@ class TarjetamedioBoletoUniversitario extends Tarjeta {
     }
     
     public function pagarTarjeta(){
-        $tiempoactual = new Datetime();
+        $tiempoactual = new DateTime();
         if ($tiempoactual->getTimestamp() / 60 > $this->ultimopago->getTimestamp()){
             $this->cantidadpagos = 0;
         }
