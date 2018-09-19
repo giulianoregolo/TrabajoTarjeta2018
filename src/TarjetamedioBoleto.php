@@ -11,7 +11,7 @@ class TarjetamedioBoleto extends Tarjeta {
     }
     
     public function pagarTarjeta(){
-        $tiempoactual = new DateTime();
+        $tiempoactual = new \DateTime();
         $diferenciadetiempo = date_diff($this->ultimopago, $tiempoactual);
         if ($diferenciadetiempo->getTimestamp() < 300){
             return false;
