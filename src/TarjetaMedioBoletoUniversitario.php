@@ -2,7 +2,7 @@
 
 namespace TrabajoTarjeta;
 
-class TarjetamedioBoletoUniversitario extends TarjetamedioBoleto {
+class TarjetamedioBoletoUniversitario extends Tarjeta {
     protected $valor = 7.40;
     protected $ultimopago;
     protected $cantidadpagos = 0;

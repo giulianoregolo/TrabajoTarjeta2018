@@ -8,11 +8,11 @@ class TarjetamedioBoleto extends Tarjeta {
     protected $ultimopago;
     
     public function _construct(){
-        $this->ultimopago = new DateTime();
+        $this->ultimopago = time();
     }
     
     public function pagarTarjeta(){
-        $tiempoactual = new \DateTime();
+        $tiempoactual = time();
         $diferenciadetiempo = date_diff($this->ultimopago, $tiempoactual);
         if ($diferenciadetiempo->getTimestamp() < 300){
             return false;
