@@ -2,7 +2,7 @@
 
 namespace TrabajoTarjeta;
 
-class TarjetamedioBoletoUniversitario extends TrabajoTarjeta\Tarjeta {
+class TarjetamedioBoletoUniversitario extends TarjetamedioBoleto {
     protected $valor = 7.40;
     protected $ultimopago;
     protected $cantidadpagos = 0;
@@ -43,7 +43,6 @@ class TarjetamedioBoletoUniversitario extends TrabajoTarjeta\Tarjeta {
                     }
                     else{
                         $this->saldo = $this->saldo - $this->valor;
-                        $this->obtenerSaldo();
                         $this->ultimopago = new DateTime();
                         if ($this->cantidadpagos < 2){
                             $this->cantidadpagos = $this->cantidadpagos + 1;
@@ -62,7 +61,6 @@ class TarjetamedioBoletoUniversitario extends TrabajoTarjeta\Tarjeta {
                     }
                     else{
                         $this->saldo = $this->saldo - $this->valor;
-                        $this->obtenerSaldo();
                         $this->ultimopago = new DateTime();
                         if ($this->cantidadpagos < 2){
                             $this->cantidadpagos = $this->cantidadpagos + 1;
@@ -76,7 +74,6 @@ class TarjetamedioBoletoUniversitario extends TrabajoTarjeta\Tarjeta {
                             $this->valor = 14.80;
                     }
                     $this->saldo = $this->saldo - $this->valor;
-                    $this->obtenerSaldo();
                     $this->ultimopago = new DateTime();
                     if ($this->cantidadpagos < 2){
                         $this->cantidadpagos = $this->cantidadpagos + 1;
