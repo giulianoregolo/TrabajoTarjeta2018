@@ -4,17 +4,12 @@ namespace TrabajoTarjeta;
 
 class TarjetamedioBoleto extends Tarjeta {
     protected $tipo = "Medio";
+    protected $tiempo_de_espera = 300;
     protected $valor = 7.40;
-    protected $ultimopago;
-    
-    public function _construct(){
-        $this->ultimopago = time();
-    }
-    
+    protected $ultimopago = null;
+
     public function pagarTarjeta(){
-        $tiempoactual = time();
-        $diferenciadetiempo = date_diff($this->ultimopago, $tiempoactual);
-        if ($diferenciadetiempo->getTimestamp() < 300){
+        if ($ultimopago  || tiempoDeEsperaCumplido()){
             return false;
         }
         if($this->saldo < $this->valor){
@@ -68,4 +63,20 @@ class TarjetamedioBoleto extends Tarjeta {
         }
     
     }
+
+    public function tiempoDeEsperaCumplido(){
+        $ultimopago = $this->obtenerUltimaFechaPagada();
+        $fecha_actual = $this->tiempo->time();
+        $diferencia_fechas = $fecha_actual - $ultimopago;
+        if($diferencia_fechas >= $this->obtenerTiempoDeEspera()){
+                return TRUE;
+        }
+        return FALSE;
+    }
+    public function obtenerTiempoDeEspera(){
+        return $this->tiempo_de_espera;
+    }
+    public function obtenerUltimaFechaPagada(){
+        return $this->fecha_pagada;
+      }
 }

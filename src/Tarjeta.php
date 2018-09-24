@@ -11,6 +11,13 @@ class Tarjeta implements TarjetaInterface {
     protected $tipo = "Normal";
     public $caso;
     protected $costoPlus;
+    protected $tiempo;
+
+    public function __construct(TiempoInterface $tiempo, $id){
+        $this->tiempo=$tiempo;
+        $this->id = $id;
+    }
+    
     public function recargar($monto) {
 	  if($monto == 10.0 || $monto == 20.0 || $monto == 30.0 || $monto == 50.0 || $monto == 100.0 || $monto == 510.15 || $monto == 962.59)
 	  {
