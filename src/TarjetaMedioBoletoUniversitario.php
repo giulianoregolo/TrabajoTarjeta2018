@@ -69,47 +69,48 @@ class TarjetamedioBoletoUniversitario extends Tarjeta {
                     break;
             }
         }
-        public function tiempoDeEsperaCumplido(){
-            $ultimopago = $this->ultimopago);
-            $fecha_actual = $this->tiempo->time();
-            $diferencia_fechas = $fecha_actual - $ultimopago;
-            if($diferencia_fechas >= $this->obtenerTiempoDeEspera()){
-                    return TRUE;
-            }
-            return FALSE;
-        }
-
-        public function medioDisponible(){
-            if($this->cantidadpagos < 2){
+    }
+    public function tiempoDeEsperaCumplido(){
+        $ultimopago = $this->ultimopago;
+        $fecha_actual = $this->tiempo->time();
+        $diferencia_fechas = $fecha_actual - $ultimopago;
+        if($diferencia_fechas >= $this->obtenerTiempoDeEspera()){
                 return TRUE;
-            }
-            if($this->tiempoDeEsperaUltimoMedioCumplido()){
-              $this->cantidadpagos = 0;
-              return TRUE;
-            }
-            return FALSE;
-            
         }
+        return FALSE;
+    }
 
-        public function tiempoDeEsperaUltimoMedioCumplido(){
-            $fecha_ultima = $this->obtenerUltimaFechaPagada();
-            
-            $fecha_ultima = date("d/m/y", $fecha_ultima);
-        
-            $fecha_actual = $this->tiempo->time();
-            $fecha_actual = date("d/m/y", $fecha_actual);
-                
-            if($fecha_ultima < $fecha_actual){
-                 return TRUE;
-            }
-            return FALSE;
-     
+    public function medioDisponible(){
+        if($this->cantidadpagos < 2){
+            return TRUE;
         }
-        public function obtenerTiempoDeEspera(){
-            return $this->tiempo_de_espera;
+        if($this->tiempoDeEsperaUltimoMedioCumplido()){
+          $this->cantidadpagos = 0;
+          return TRUE;
         }
-        public function obtenerUltimaFechaPagada(){
-            return $this->ultimopago;
+        return FALSE;
+
+    }
+
+    public function tiempoDeEsperaUltimoMedioCumplido(){
+        $fecha_ultima = $this->obtenerUltimaFechaPagada();
+
+        $fecha_ultima = date("d/m/y", $fecha_ultima);
+
+        $fecha_actual = $this->tiempo->time();
+        $fecha_actual = date("d/m/y", $fecha_actual);
+
+        if($fecha_ultima < $fecha_actual){
+             return TRUE;
         }
+        return FALSE;
+
+    }
+    public function obtenerTiempoDeEspera(){
+        return $this->tiempo_de_espera;
+    }
+    public function obtenerUltimaFechaPagada(){
+        return $this->ultimopago;
     }
 }
+
