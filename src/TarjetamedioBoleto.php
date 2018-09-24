@@ -9,7 +9,7 @@ class TarjetamedioBoleto extends Tarjeta {
     protected $ultimopago = null;
 
     public function pagarTarjeta(){
-        if ($ultimopago  || tiempoDeEsperaCumplido()){
+        if ($this->ultimopago == null  || tiempoDeEsperaCumplido()){
             return false;
         }
         if($this->saldo < $this->valor){
@@ -37,7 +37,7 @@ class TarjetamedioBoleto extends Tarjeta {
                     else{
                         $this->saldo = $this->saldo - $this->valor;
                         $this->obtenerSaldo();
-                        $this->ultimopago = new DateTime();
+                        $this->ultimopago = $this->tiempo->time();
                         return true;
                     }
 
@@ -49,14 +49,14 @@ class TarjetamedioBoleto extends Tarjeta {
                     else{
                         $this->saldo = $this->saldo - $this->valor;
                         $this->obtenerSaldo();
-                        $this->ultimopago = new DateTime();
+                        $this->ultimopago = $this->tiempo->time();
                         return true;
                     }
                 
                 case 2:
                     $this->saldo = $this->saldo - $this->valor;
                     $this->obtenerSaldo();
-                    $this->ultimopago = new DateTime();
+                    $this->ultimopago = $this->tiempo->time();
                     return true;
                     break;
             }
@@ -77,6 +77,6 @@ class TarjetamedioBoleto extends Tarjeta {
         return $this->tiempo_de_espera;
     }
     public function obtenerUltimaFechaPagada(){
-        return $this->fecha_pagada;
+        return $this->ultimopago;
       }
 }
