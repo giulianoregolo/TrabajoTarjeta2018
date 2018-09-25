@@ -10,7 +10,8 @@ class MedioBoletoTest extends TestCase {
      * Comprueba que el medio boleto page la mitad que una tarjeta normal en un pago estandar.
      */
     public function testpagarmontoEstandar() {
-        $medioboleto = new TarjetamedioBoleto;
+        $tiempo = new Tiempo();
+        $medioboleto = new TarjetamedioBoleto($tiempo, null);
         $colectivo = new Colectivo("mixta","133",420);
         $medioboleto->recargar(50.0);
         $this->assertEquals($colectivo->pagarCon($medioboleto), new Boleto($colectivo,$medioboleto));
@@ -21,7 +22,8 @@ class MedioBoletoTest extends TestCase {
      * Comprueba que el medio boleto page la mitad que una tarjeta normal en un pago con un viaje plus acumulado
      */
     public function testpagarmontoviajeplusSimple() {
-        $medioboleto = new TarjetamedioBoleto;
+        $tiempo = new Tiempo();
+        $medioboleto = new TarjetamedioBoleto($tiempo, null);
         $colectivo = new Colectivo("mixta","133",420);
         $medioboleto->recargar(50.0);
         $medioboleto->gastarPlus();
@@ -33,7 +35,8 @@ class MedioBoletoTest extends TestCase {
      * Comprueba que el medio boleto page la mitad que una tarjeta normal en un pago con dos viajes plus acumulados
      */
     public function testpagarmontoviajeplusDoble() {
-        $medioboleto = new TarjetamedioBoleto;
+        $tiempo = new Tiempo();
+        $medioboleto = new TarjetamedioBoleto($tiempo, null);;
         $colectivo = new Colectivo("mixta","133",420);
         $medioboleto->recargar(50.0);
         $medioboleto->gastarPlus();
@@ -43,7 +46,8 @@ class MedioBoletoTest extends TestCase {
     }
     
     public function testmedioboletoTiempo() {
-        $medioboleto = new TarjetamedioBoleto;
+        $tiempo = new Tiempo();
+        $medioboleto = new TarjetamedioBoleto($tiempo, null);
         $medioboleto->recargar(50.0);
         $colectivo = new Colectivo(NULL,NULL,NULL);
         $medioboleto->pagarTarjeta();

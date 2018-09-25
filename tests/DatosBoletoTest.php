@@ -7,7 +7,8 @@ use PHPUnit\Framework\TestCase;
 class DatosBoletoTest extends TestCase {
 
     public function testBoletoNormal() {
-        $tarjeta = new Tarjeta;
+        $tiempoprueba = new Tiempo();
+        $tarjeta = new Tarjeta($tiempoprueba, NULL);
         $colectivo = new Colectivo("mixta","103",420);
         $tarjeta->recargar(20.0);
         $boleto = $colectivo->pagarCon($tarjeta);
@@ -18,7 +19,8 @@ class DatosBoletoTest extends TestCase {
         $this->assertEquals($boleto->obtenerTipoBoleto(),"Normal");
     }
     public function testBoletoplus() {
-        $tarjeta = new Tarjeta;
+        $tiempoprueba = new Tiempo();
+        $tarjeta = new Tarjeta($tiempoprueba, NULL);
         $colectivo = new Colectivo("mixta","103",420);
         $boleto = $colectivo->pagarCon($tarjeta);
         $this->assertEquals($boleto->obtenerCostoTotal(),0.0);
@@ -28,7 +30,8 @@ class DatosBoletoTest extends TestCase {
         $this->assertEquals($boleto->obtenerTipoBoleto(),"viajeplus");
     }
     public function testBoletoPagandoPlus() {
-        $tarjeta = new Tarjeta;
+        $tiempoprueba = new Tiempo();
+        $tarjeta = new Tarjeta($tiempoprueba, NULL);
         $colectivo = new Colectivo("mixta","103",420);
         $tarjeta->gastarPlus();
         $tarjeta->recargar(50.0);

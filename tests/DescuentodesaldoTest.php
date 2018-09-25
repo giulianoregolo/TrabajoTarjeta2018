@@ -7,7 +7,8 @@ class DescuentodesaldoTest extends TestCase {
      */
      
     public function testDescuentoDeUnPlus() {
-        $tarjeta = new Tarjeta();
+        $tiempoprueba = new Tiempo();
+        $tarjeta = new Tarjeta($tiempoprueba, NULL);
         $cole= new Colectivo("mixta","103",420);        
         $tarjeta->recargar(100.0);
         $tarjeta->gastarPlus();
@@ -16,7 +17,8 @@ class DescuentodesaldoTest extends TestCase {
         $this->assertEquals($tarjeta->obtenerSaldo(),(100.0-29.60));
     }
     public function testDescuentoDeDosPlus() {
-        $tarjeta = new Tarjeta();
+        $tiempoprueba = new Tiempo();
+        $tarjeta = new Tarjeta($tiempoprueba, NULL);
         $cole= new Colectivo("mixta","103",420);
         $tarjeta->recargar(100.0);
         $tarjeta->gastarPlus();

@@ -10,7 +10,8 @@ class TarjetaviajeplusTest extends TestCase {
      * Comprueba que si puede usar viajes plus.
      */
 	 public function testusarviajesplus(){
-        $tarjeta = new Tarjeta;
+        $tiempoprueba = new Tiempo();
+        $tarjeta = new Tarjeta($tiempoprueba, NULL);
 		$colectivo = new Colectivo("mixta","103",420);
 
         $this->assertEquals($colectivo->pagarCon($tarjeta), new Boleto($colectivo,$tarjeta));
@@ -22,7 +23,8 @@ class TarjetaviajeplusTest extends TestCase {
      * Comprueba que no si puede usar mas de 2 viajes plus.
      */
 	public function testnousarmasviajesplus(){
-        $tarjeta = new Tarjeta;
+        $tiempoprueba = new Tiempo();
+        $tarjeta = new Tarjeta($tiempoprueba, NULL);
 		$colectivo = new Colectivo("mixta","103",420);
 
         $this->assertEquals($colectivo->pagarCon($tarjeta), new Boleto($colectivo,$tarjeta));
