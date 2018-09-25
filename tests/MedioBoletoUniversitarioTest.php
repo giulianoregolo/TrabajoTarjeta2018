@@ -11,7 +11,7 @@ class MedioBoletoUniversitarioTest extends TestCase {
      */
     public function testmedioboletouniversitarioTiempo() {
         $tiempo = new Tiempo();
-        $medioboleto = new TarjetamedioBoletoUniversitario($tiempo, null);
+        $medioboleto = new TarjetaMedioBoletoUniversitario($tiempo, null);
         $medioboleto->recargar(50.0);
         $medioboleto->pagarTarjeta();
         $medioboleto->pagarTarjeta();
