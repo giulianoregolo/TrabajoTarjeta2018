@@ -35,8 +35,7 @@ class TarjetamedioBoleto extends Tarjeta {
                         return false;
                     }
                     else{
-                        $this->saldo = $this->saldo - $this->valor;
-                        $this->obtenerSaldo();
+                        $this->saldo = $this->saldo - $this->valor;                        
                         $this->ultimopago = $this->tiempo->time();
                         return true;
                     }
@@ -48,14 +47,12 @@ class TarjetamedioBoleto extends Tarjeta {
                     }
                     else{
                         $this->saldo = $this->saldo - $this->valor;
-                        $this->obtenerSaldo();
                         $this->ultimopago = $this->tiempo->time();
                         return true;
                     }
                 
                 case 2:
-                    $this->saldo = $this->saldo - $this->valor;
-                    $this->obtenerSaldo();
+                    $this->saldo = $this->saldo - $this->valor;                    
                     $this->ultimopago = $this->tiempo->time();
                     return true;
                     break;
