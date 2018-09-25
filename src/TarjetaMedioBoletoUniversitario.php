@@ -13,7 +13,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
     }
 
     public function pagarTarjeta(){
-        $valoraux = obtenerValorBoleto();
+        $valoraux = $this->obtenerValorBoleto();
         if($this->saldo < $valoraux){
             switch($this->viajesplus){
                 case 0:
