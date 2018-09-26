@@ -9,7 +9,7 @@ class TarjetamedioBoleto extends Tarjeta {
     protected $ultimopago = null;
 
     public function pagarTarjeta(){
-        if (tiempoDeEsperaCumplido()){
+        if ($this->tiempoDeEsperaCumplido()){
             return false;
         }
         if($this->saldo < $this->valor){
