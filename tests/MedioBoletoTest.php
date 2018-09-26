@@ -14,8 +14,8 @@ class MedioBoletoTest extends TestCase {
         $medioboleto = new TarjetamedioBoleto($tiempo, null);
         $colectivo = new Colectivo("mixta","133",420);
         $medioboleto->recargar(50.0);
-        $medioboleto->pagarTarjeta();
-        $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-7.40));
+        $this->assertEquals($medioboleto->pagarTarjeta(),TRUE);
+        $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-9.40));
     }
     
     /**
