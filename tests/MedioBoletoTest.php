@@ -29,7 +29,7 @@ class MedioBoletoTest extends TestCase {
         $medioboleto->gastarPlus();
         $medioboleto->pagarTarjeta();
         $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-22.2));
-        $this->assertEquals($medioboleto->obetenerPlus(),2);
+        $this->assertEquals($medioboleto->obetenerPlus(),1);
     }
     
     /**
@@ -44,14 +44,14 @@ class MedioBoletoTest extends TestCase {
         $medioboleto->gastarPlus();
         $medioboleto->pagarTarjeta();
         $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-37.0));
-        $this->assertEquals($medioboleto->obetenerPlus(),2);
+        $this->assertEquals($medioboleto->obetenerPlus(),0);
     }
     
     public function testmedioboletoTiempo() {
         $tiempo = new Tiempo();
         $medioboleto = new TarjetamedioBoleto($tiempo, null);
         $medioboleto->recargar(50.0);
-        $colectivo = new Colectivo(NULL,NULL,NULL);
+        $colectivo = new Colectivo("mixta","133",420);
         $medioboleto->pagarTarjeta();
         $this->assertEquals($colectivo->pagarCon($medioboleto), false);
     }
