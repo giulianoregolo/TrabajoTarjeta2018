@@ -7,23 +7,23 @@ class DescuentodesaldoTest extends TestCase {
      */
      
     public function testDescuentoDeUnPlus() {
-        $tarjeta = new Tarjeta();
-        $cole= new Colectivo(NULL,NULL,NULL);
-        $boleto= new Boleto($cole,$tarjeta,$valor=29.60);
+        $tiempoprueba = new Tiempo();
+        $tarjeta = new Tarjeta($tiempoprueba, NULL);
+        $cole= new Colectivo("mixta","103",420);        
         $tarjeta->recargar(100.0);
         $tarjeta->gastarPlus();
         
-        $this->assertEquals($cole->pagarCon($tarjeta), $boleto);
+        $this->assertEquals($cole->pagarCon($tarjeta), $boleto= new Boleto($cole,$tarjeta));
         $this->assertEquals($tarjeta->obtenerSaldo(),(100.0-29.60));
-    } 
+    }
     public function testDescuentoDeDosPlus() {
-        $tarjeta = new Tarjeta();
-        $cole= new Colectivo(NULL,NULL,NULL);
-        $boleto= new Boleto($cole,$tarjeta,$valor=44.4);
+        $tiempoprueba = new Tiempo();
+        $tarjeta = new Tarjeta($tiempoprueba, NULL);
+        $cole= new Colectivo("mixta","103",420);
         $tarjeta->recargar(100.0);
         $tarjeta->gastarPlus();
         $tarjeta->gastarPlus();
-        $this->assertEquals($cole->pagarCon($tarjeta), $boleto);
+        $this->assertEquals($cole->pagarCon($tarjeta), $boleto= new Boleto($cole,$tarjeta));
         $this->assertEquals($tarjeta->obtenerSaldo(),(100.0-44.40));
-    } 
+    }
 }

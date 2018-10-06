@@ -10,11 +10,11 @@ class MedioBoletoTest extends TestCase {
      * Comprueba que el medio boleto page la mitad que una tarjeta normal en un pago estandar.
      */
     public function testpagarmontoEstandar() {
-        $medioboleto = new TarjetamedioBoleto;
-        $colectivo = new Colectivo(NULL,NULL,NULL);
+        $tiempo = new Tiempo();
+        $medioboleto = new TarjetamedioBoleto($tiempo, null);
+        $colectivo = new Colectivo("mixta","133",420);
         $medioboleto->recargar(50.0);
-        $boleto= new Boleto($colectivo,$medioboleto,$valor=7.40);
-        $this->assertEquals($colectivo->pagarCon($medioboleto), $boleto);
+        $this->assertEquals($medioboleto->pagarTarjeta(),True);
         $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-7.40));
     }
     
@@ -22,26 +22,39 @@ class MedioBoletoTest extends TestCase {
      * Comprueba que el medio boleto page la mitad que una tarjeta normal en un pago con un viaje plus acumulado
      */
     public function testpagarmontoviajeplusSimple() {
-        $medioboleto = new TarjetamedioBoleto;
-        $colectivo = new Colectivo(NULL,NULL,NULL);
+        $tiempo = new Tiempo();
+        $medioboleto = new TarjetamedioBoleto($tiempo, null);
+        $colectivo = new Colectivo("mixta","133",420);
         $medioboleto->recargar(50.0);
-        $boleto= new Boleto($colectivo,$medioboleto,$valor=22.2);
         $medioboleto->gastarPlus();
-        $this->assertEquals($colectivo->pagarCon($medioboleto), $boleto);
+        $medioboleto->pagarTarjeta();
         $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-22.2));
+        $this->assertEquals($medioboleto->obetenerPlus(),1);
     }
     
     /**
      * Comprueba que el medio boleto page la mitad que una tarjeta normal en un pago con dos viajes plus acumulados
      */
     public function testpagarmontoviajeplusDoble() {
-        $medioboleto = new TarjetamedioBoleto;
-        $colectivo = new Colectivo(NULL,NULL,NULL);
+        $tiempo = new Tiempo();
+        $medioboleto = new TarjetamedioBoleto($tiempo, null);;
+        $colectivo = new Colectivo("mixta","133",420);
         $medioboleto->recargar(50.0);
-        $boleto= new Boleto($colectivo,$medioboleto,$valor=37.0);
         $medioboleto->gastarPlus();
         $medioboleto->gastarPlus();
-        $this->assertEquals($colectivo->pagarCon($medioboleto), $boleto);
+        $medioboleto->pagarTarjeta();
         $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-37.0));
+        $this->assertEquals($medioboleto->obetenerPlus(),0);
     }
+    /*
+    public function testmedioboletoTiempo() {
+        $tiempo = new Tiempo();
+        $medioboleto = new TarjetamedioBoleto($tiempo, null);
+        $medioboleto->recargar(50.0);
+        $colectivo = new Colectivo("mixta","133",420);
+        $medioboleto->pagarTarjeta();
+        $this->assertEquals($medioboleto->pagarTarjeta(), false);
+    }
+    */
+
 }
