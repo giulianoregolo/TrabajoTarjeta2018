@@ -149,4 +149,8 @@ class Tarjeta implements TarjetaInterface {
     public function obtenerTipo():string{
         return $this->tipo;
     }
+
+    public function esTrasbordo():boolean{
+        
+    }
 }

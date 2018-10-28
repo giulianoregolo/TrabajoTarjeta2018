@@ -38,4 +38,6 @@ interface TarjetaInterface {
     
     public function obtenerTipo();
 
+    public function esTrasbordo();
+
 }
