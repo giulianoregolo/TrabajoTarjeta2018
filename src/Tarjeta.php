@@ -69,7 +69,14 @@ class Tarjeta implements TarjetaInterface {
             switch($this->viajesplus){
                 case 0:
                     $this->costoPlus = 14.80*2;
-                    $this->costo = $this->valor + $this->costoPlus ;
+                    if ($this->esTrasbordo()){
+                        $this->costo = ($this->valor*100)/33 + $this->costoPlus;
+                        $this->caso = "Trasbordo";
+                    }
+                    else{
+                        $this->costo = $this->valor + $this->costoPlus ;
+                        $this->caso = "Normal";
+                    }
                     if($this->saldo < $this->costo){
                         return false;
                     }
@@ -82,7 +89,14 @@ class Tarjeta implements TarjetaInterface {
 
                 case 1:
                     $this->costoPlus = 14.80;
-                    $this->costo = $this->valor + $this->costoPlus;
+                    if ($this->esTrasbordo()){
+                        $this->costo = ($this->valor*100)/33 + $this->costoPlus;
+                        $this->caso = "Trasbordo";
+                    }
+                    else{
+                        $this->costo = $this->valor + $this->costoPlus ;
+                        $this->caso = "Normal";
+                    }
                     if($this->saldo < $this->costo){
                         return false;
                     }
@@ -94,9 +108,15 @@ class Tarjeta implements TarjetaInterface {
                     }
                 
                 case 2:
-                    $this->costo = $this->valor;
+                    if ($this->esTrasbordo()){
+                        $this->costo = ($this->valor*100)/33;
+                        $this->caso = "Trasbordo";
+                    }
+                    else{
+                        $this->costo = $this->valor;
+                        $this->caso = "Normal";
+                    }
                     $this->saldo = $this->saldo - $this->costo;
-                    $this->caso = "Normal";
                     $this->obtenerSaldo();
                     return true;
 
