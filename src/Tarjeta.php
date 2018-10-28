@@ -13,7 +13,6 @@ class Tarjeta implements TarjetaInterface {
     protected $costoPlus;
     protected $tiempo;
     protected $utlimalinea = NULL;
-    protected $ultimabandera = NULL;
 
     public function __construct(TiempoInterface $tiempo, $id){
         $this->tiempo=$tiempo;
@@ -153,6 +152,6 @@ class Tarjeta implements TarjetaInterface {
     }
 
     public function esTrasbordo($colectivo):boolean{
-        
+
     }
 }
