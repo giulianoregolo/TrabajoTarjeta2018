@@ -50,7 +50,7 @@ class Tarjeta implements TarjetaInterface {
         return $this->viajesplus;
     }
     
-    public function pagarTarjeta(){
+    public function pagarTarjeta(ColectivoInterface $colectivo){
         if($this->saldo < $this->valor){
             switch($this->viajesplus){
                 case 0:
@@ -71,7 +71,7 @@ class Tarjeta implements TarjetaInterface {
             switch($this->viajesplus){
                 case 0:
                     $this->costoPlus = 14.80*2;
-                    if ($this->esTrasbordo()){
+                    if ($this->esTrasbordo($colectivo)){
                         $this->costo = ($this->valor*100)/33 + $this->costoPlus;
                         $this->caso = "Trasbordo";
                     }
@@ -91,7 +91,7 @@ class Tarjeta implements TarjetaInterface {
 
                 case 1:
                     $this->costoPlus = 14.80;
-                    if ($this->esTrasbordo()){
+                    if ($this->esTrasbordo($colectivo)){
                         $this->costo = ($this->valor*100)/33 + $this->costoPlus;
                         $this->caso = "Trasbordo";
                     }
@@ -110,7 +110,7 @@ class Tarjeta implements TarjetaInterface {
                     }
                 
                 case 2:
-                    if ($this->esTrasbordo()){
+                    if ($this->esTrasbordo($colectivo)){
                         $this->costo = ($this->valor*100)/33;
                         $this->caso = "Trasbordo";
                     }
@@ -152,7 +152,7 @@ class Tarjeta implements TarjetaInterface {
         return $this->tipo;
     }
 
-    public function esTrasbordo():boolean{
-
+    public function esTrasbordo($colectivo):boolean{
+        
     }
 }
