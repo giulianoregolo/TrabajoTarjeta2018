@@ -24,7 +24,7 @@ interface TarjetaInterface {
     
     public function obetenerPlus();
     
-    public function pagarTarjeta($colectivo);
+    public function pagarTarjeta();
     
     public function gastarPlus();
 
