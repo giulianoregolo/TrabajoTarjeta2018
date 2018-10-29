@@ -12,7 +12,7 @@ class Tarjeta implements TarjetaInterface {
     public $caso;
     protected $costoPlus;
     protected $tiempo;
-    protected $utlimalinea = NULL;
+    protected $ultimalinea = NULL;
     protected $ultimopago = NULL;
 
     public function __construct(TiempoInterface $tiempo, $id){
