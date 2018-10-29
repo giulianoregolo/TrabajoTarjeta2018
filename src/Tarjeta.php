@@ -86,6 +86,7 @@ class Tarjeta implements TarjetaInterface {
                         $this->saldo = $this->saldo - $this->costo;
                         $this->obtenerSaldo();
                         $this->caso = "pagandoPlus";
+                        $this->ultimopago = $this->tiempo->time();
                         return true;
                     }
 
@@ -106,6 +107,7 @@ class Tarjeta implements TarjetaInterface {
                         $this->saldo = $this->saldo - $this->costo;
                         $this->obtenerSaldo();
                         $this->caso = "pagandoPlus";
+                        $this->ultimopago = $this->tiempo->time();
                         return true;
                     }
                 
@@ -120,6 +122,7 @@ class Tarjeta implements TarjetaInterface {
                     }
                     $this->saldo = $this->saldo - $this->costo;
                     $this->obtenerSaldo();
+                    $this->ultimopago = $this->tiempo->time();
                     return true;
 
             }
