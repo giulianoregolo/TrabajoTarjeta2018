@@ -24,7 +24,7 @@ interface TarjetaInterface {
     
     public function obetenerPlus();
     
-    public function pagarTarjeta();
+    public function pagarTarjeta($colectivo);
     
     public function gastarPlus();
 
@@ -37,5 +37,7 @@ interface TarjetaInterface {
     public function obtenerCostoPlus();
     
     public function obtenerTipo();
+
+    public function esTrasbordo($colectivo);
 
 }

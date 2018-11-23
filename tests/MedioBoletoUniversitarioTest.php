@@ -12,10 +12,11 @@ class MedioBoletoUniversitarioTest extends TestCase {
     public function testmedioboletouniversitarioTiempo() {
         $tiempo = new Tiempo();
         $medioboleto = new TarjetaMedioBoletoUniversitario($tiempo, null);
+        $colectivo = new Colectivo("mixta","103",420);
         $medioboleto->recargar(50.0);
-        $medioboleto->pagarTarjeta();
-        $medioboleto->pagarTarjeta();
-        $medioboleto->pagarTarjeta();
+        $medioboleto->pagarTarjeta($colectivo);
+        $medioboleto->pagarTarjeta($colectivo);
+        $medioboleto->pagarTarjeta($colectivo);
         $this->assertEquals($medioboleto->obtenerSaldo(), 20.4);
     }
 }
