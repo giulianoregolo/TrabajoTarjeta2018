@@ -5,12 +5,12 @@ namespace TrabajoTarjeta;
 class TarjetamedioBoleto extends Tarjeta {
     protected $tipo = "Medio";
     protected $tiempo_de_espera = 300;
-    protected $valor = 7.40;
+    protected $valor = 14.80;
     protected $ultimopago = null;
 
     public function pagarTarjeta($colectivo){
         if ($this->tiempoDeEsperaCumplido() && $this->ultimopago != null){
-            return false;
+		$this->valor = $this->valor/2; 	
         }
         if($this->saldo < $this->valor){
             switch($this->viajesplus){
