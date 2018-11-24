@@ -10,7 +10,7 @@ class Tarjeta implements TarjetaInterface {
     protected $id;
     protected $tipo = "Normal";
     public $caso;
-    protected $costoPlus;
+    protected $costoPlus = 0.0;
     protected $tiempo;
     protected $lineaAnterior = NULL;
     protected $numeroAnterior = NULL;
@@ -53,13 +53,6 @@ class Tarjeta implements TarjetaInterface {
     }
     
     public function pagarTarjeta(ColectivoInterface $colectivo){
-        if($this->haytrans(ColectivoInterface $colectivo)){
-            $valor = 
-            $this->saldo = $this->saldo - $valor;
-            $this->guardoCole($colectivo);
-            $this->trasbordo = false
-            return true;
-        }  
         if($this->saldo < $this->valor){
             switch($this->viajesplus){
                 case 0:
@@ -83,43 +76,79 @@ class Tarjeta implements TarjetaInterface {
         else{
             switch($this->viajesplus){
                 case 0:
-                    $this->costoPlus = 14.80*2;
+                    $this->costoPlus = $this->valor*2;
+                    $this->costo = $this->costoPlus + $this->valor;
                     if($this->saldo < $this->costo){
                         return false;
                     }
                     else{
-                        $this->saldo = $this->saldo - $this->costo;
-                        $this->obtenerSaldo();
-                        $this->caso = "pagandoPlus";
-                        $this->ultimopago = $this->tiempo->time();
-                        return true;
-                        $this->trasbordo = true;
-                        $this->guardoCole($colectivo);
+                        if($this->haytrans($colectivo)){
+                            $this->valor = ($this->valor /33)*100;
+                            $this->costo = $this->costoPlus + $this->valor;
+                            $this->saldo = $this->saldo - $this->costo;
+                            $this->caso = "Trasbordo";
+                            $this->ultimopago = $this->tiempo->time();
+                            $this->guardoCole($colectivo);
+                            $this->trasbordo = false;
+                            return true;
+                        }
+                        else{
+                            $this->saldo = $this->saldo - $this->costo;
+                            $this->caso = "pagandoPlus";
+                            $this->ultimopago = $this->tiempo->time();
+                            $this->trasbordo = true;
+                            $this->guardoCole($colectivo);
+                            return true;
+                        }
                     }
 
                 case 1:
-                    $this->costoPlus = 14.80;
+                    $this->costoPlus = $this->valor;
+                    $this->costo = $this->costoPlus + $this->valor;
                     if($this->saldo < $this->costo){
                         return false;
                     }
                     else{
+                        if($this->haytrans($colectivo)){
+                            $this->valor = ($this->valor /33)*100;
+                            $this->costo = $this->costoPlus + $this->valor;
+                            $this->saldo = $this->saldo - $this->costo;
+                            $this->caso = "Trasbordo";
+                            $this->ultimopago = $this->tiempo->time();
+                            $this->guardoCole($colectivo);
+                            $this->trasbordo = false;
+                            return true;
+                        }
+                        else{
+                            $this->saldo = $this->saldo - $this->costo;
+                            $this->caso = "pagandoPlus";
+                            $this->ultimopago = $this->tiempo->time();
+                            $this->guardoCole($colectivo);
+                            $this->trasbordo = true;
+                            return true;
+                        }
+                    }
+                case 2:
+                    if($this->haytrans($colectivo)){ 
+                        $this->valor = ($this->valor /33)*100;
+                        $this->costo = $this->costoPlus + $this->valor;
                         $this->saldo = $this->saldo - $this->costo;
-                        $this->obtenerSaldo();
-                        $this->caso = "pagandoPlus";
+                        $this->caso = "Trasbordo";
+                        $this->ultimopago = $this->tiempo->time();
+                        $this->guardoCole($colectivo);
+                        $this->trasbordo = flase;
+                        return true;
+                    }
+                    else{
+                        $this->valor = 14.80;
+                        $this->costo = $this->costoPlus + $this->valor;
+                        $this->saldo = $this->saldo - $this->costo;
+                        $this->caso = "Normal";
                         $this->ultimopago = $this->tiempo->time();
                         $this->guardoCole($colectivo);
                         $this->trasbordo = true;
                         return true;
-                    }
-                
-                case 2:
-                    $this->saldo = $this->saldo - $this->costo;
-                    $this->obtenerSaldo();
-                    $this->ultimopago = $this->tiempo->time();
-                    $this->guardoCole($colectivo);
-                    $this->trasbordo = true;
-                    return true;
-
+                    }    
             }
         }
     }
@@ -151,8 +180,7 @@ class Tarjeta implements TarjetaInterface {
     }
 
     public function haytrans(ColectivoInterface $colectivo){
-        $saldoSuf = ( round( ($this->valor / 3), 3 ) + abs( $this->viajesplus - 2 ) * $this->valor ) < $this->saldo;
-		return ( $this->esTrasbordo( $colectivo ) && $this->tiempoValido() && $this->trasbordo && $saldoSuf );
+		return ( $this->esTrasbordo( $colectivo ) && $this->tiempoValido() && $this->trasbordo);
     }
 
 	public function esTrasbordo(ColectivoInterface $colectivo) {	

@@ -14,7 +14,7 @@ class MedioBoletoTest extends TestCase {
         $medioboleto = new TarjetamedioBoleto($tiempo, null);
         $colectivo = new Colectivo("mixta","133",420);
         $medioboleto->recargar(50.0);
-        $this->assertEquals($medioboleto->pagarTarjeta(),True);
+        $this->assertEquals($medioboleto->pagarTarjeta($colectivo),True);
         $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-7.40));
     }
     
@@ -27,7 +27,7 @@ class MedioBoletoTest extends TestCase {
         $colectivo = new Colectivo("mixta","133",420);
         $medioboleto->recargar(50.0);
         $medioboleto->gastarPlus();
-        $medioboleto->pagarTarjeta();
+        $medioboleto->pagarTarjeta($colectivo);
         $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-22.2));
         $this->assertEquals($medioboleto->obetenerPlus(),1);
     }
@@ -42,7 +42,7 @@ class MedioBoletoTest extends TestCase {
         $medioboleto->recargar(50.0);
         $medioboleto->gastarPlus();
         $medioboleto->gastarPlus();
-        $medioboleto->pagarTarjeta();
+        $medioboleto->pagarTarjeta($colectivo);
         $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-37.0));
         $this->assertEquals($medioboleto->obetenerPlus(),0);
     }
@@ -53,8 +53,8 @@ class MedioBoletoTest extends TestCase {
         $medioboleto->recargar(50.0);
         $tiemponuevo = new TiempoFalso();
         $colectivo = new Colectivo("mixta","133",420);
-        $medioboleto->pagarTarjeta();
-        $this->assertEquals($medioboleto->pagarTarjeta(), false);
+        $medioboleto->pagarTarjeta($colectivo);
+        $this->assertEquals($medioboleto->pagarTarjeta($colectivo), false);
     }
     
 
