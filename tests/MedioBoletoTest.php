@@ -46,15 +46,16 @@ class MedioBoletoTest extends TestCase {
         $this->assertEquals($medioboleto->obtenerSaldo(),(50.0-37.0));
         $this->assertEquals($medioboleto->obetenerPlus(),0);
     }
-    /*
+    
     public function testmedioboletoTiempo() {
         $tiempo = new Tiempo();
         $medioboleto = new TarjetamedioBoleto($tiempo, null);
         $medioboleto->recargar(50.0);
+        $tiemponuevo = new TiempoFalso();
         $colectivo = new Colectivo("mixta","133",420);
         $medioboleto->pagarTarjeta();
         $this->assertEquals($medioboleto->pagarTarjeta(), false);
     }
-    */
+    
 
 }

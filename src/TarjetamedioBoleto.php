@@ -55,7 +55,6 @@ class TarjetamedioBoleto extends Tarjeta {
                     $this->saldo = $this->saldo - $this->valor;                    
                     $this->ultimopago = $this->tiempo->time();
                     return true;
-                    break;
             }
         }
     
