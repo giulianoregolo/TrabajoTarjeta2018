@@ -70,7 +70,7 @@ class Boleto implements BoletoInterface {
         return $this->tipoBoleto;
     } 
     public function obtenerCostoPlus(){
-        return $this->costoplus;;
+        return $this->costoplus;
     }
 
 }

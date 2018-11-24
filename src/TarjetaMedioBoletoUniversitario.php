@@ -6,6 +6,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
     protected $valor = 14.80;
     protected $ultimopago;
     protected $cantidadpagos = 0;
+    protected $tiempo_de_espera = 300;
     
     public function obtenerValorBoleto(){
         if ($this->medioDisponible()) return $this->valor/2;
@@ -13,7 +14,6 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
     }
 
     public function pagarTarjeta($colectivo){
-        $this->valor = 14.80;
         $this->costo = $this->obtenerValorBoleto();
         if($this->saldo < $this->costo){
             switch($this->viajesplus){
@@ -38,7 +38,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
         else{
             switch($this->viajesplus){
                 case 0:
-                    $this->costoPlus = $this->valor*2;
+                    $this->costoPlus = 14.80+14.80;
                     $this->costo = $this->costo + $this->costoPlus;
                     if($this->saldo < $this->costo){
                         return false;
@@ -73,7 +73,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                     }
 
                 case 1:
-                    $this->costoPlus = $this->valor;
+                    $this->costoPlus = 14.80;
                     $this->costo= $this->costo+$this->costoPlus;
                     if($this->saldo < $this->this->costo){
                         return false;
@@ -142,8 +142,10 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
     }
 
     public function medioDisponible(){
-        if($this->cantidadpagos < 2){
-            return TRUE;
+        if($this->cantidadpagos < 2 ){
+            if($this->tiempoDeEsperaCumplido()){
+                return True;
+            }    
         }
         if($this->tiempoDeEsperaUltimoMedioCumplido()){
           $this->cantidadpagos = 0;
