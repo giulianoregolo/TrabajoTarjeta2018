@@ -12,8 +12,10 @@ class Tarjeta implements TarjetaInterface {
     public $caso;
     protected $costoPlus;
     protected $tiempo;
-    protected $ultimalinea = NULL;
+    protected $lineaAnterior = NULL;
+    protected $numeroAnterior = NULL;
     protected $ultimopago = NULL;
+    protected $trasbordo =false;
 
     public function __construct(TiempoInterface $tiempo, $id){
         $this->tiempo=$tiempo;
@@ -50,7 +52,14 @@ class Tarjeta implements TarjetaInterface {
         return $this->viajesplus;
     }
     
-    public function pagarTarjeta($colectivo){
+    public function pagarTarjeta(ColectivoInterface $colectivo){
+        if($this->haytrans(ColectivoInterface $colectivo)){
+            $valor = 
+            $this->saldo = $this->saldo - $valor;
+            $this->guardoCole($colectivo);
+            $this->trasbordo = false
+            return true;
+        }  
         if($this->saldo < $this->valor){
             switch($this->viajesplus){
                 case 0:
@@ -59,11 +68,15 @@ class Tarjeta implements TarjetaInterface {
                     $this->gastarplus();
                     $this->costo = 0.0;
                     $this->caso = "viajeplus";
+                    $this->guardoCole($colectivo);
+                    $this->trasbordo = true;
                     return true;
                 case 2:
                     $this->gastarplus();
                     $this->costo = 0.0;
                     $this->caso = "viajeplus";
+                    $this->guardoCole($colectivo);
+                    $this->trasbordo = true;
                     return true;
             }
         }
@@ -71,14 +84,6 @@ class Tarjeta implements TarjetaInterface {
             switch($this->viajesplus){
                 case 0:
                     $this->costoPlus = 14.80*2;
-                    if ($this->esTrasbordo($colectivo)){
-                        $this->costo = ($this->valor*100)/33 + $this->costoPlus;
-                        $this->caso = "Trasbordo";
-                    }
-                    else{
-                        $this->costo = $this->valor + $this->costoPlus ;
-                        $this->caso = "Normal";
-                    }
                     if($this->saldo < $this->costo){
                         return false;
                     }
@@ -88,18 +93,12 @@ class Tarjeta implements TarjetaInterface {
                         $this->caso = "pagandoPlus";
                         $this->ultimopago = $this->tiempo->time();
                         return true;
+                        $this->trasbordo = true;
+                        $this->guardoCole($colectivo);
                     }
 
                 case 1:
                     $this->costoPlus = 14.80;
-                    if ($this->esTrasbordo($colectivo)){
-                        $this->costo = ($this->valor*100)/33 + $this->costoPlus;
-                        $this->caso = "Trasbordo";
-                    }
-                    else{
-                        $this->costo = $this->valor + $this->costoPlus ;
-                        $this->caso = "Normal";
-                    }
                     if($this->saldo < $this->costo){
                         return false;
                     }
@@ -108,27 +107,23 @@ class Tarjeta implements TarjetaInterface {
                         $this->obtenerSaldo();
                         $this->caso = "pagandoPlus";
                         $this->ultimopago = $this->tiempo->time();
+                        $this->guardoCole($colectivo);
+                        $this->trasbordo = true;
                         return true;
                     }
                 
                 case 2:
-                    if ($this->esTrasbordo($colectivo)){
-                        $this->costo = ($this->valor*100)/33;
-                        $this->caso = "Trasbordo";
-                    }
-                    else{
-                        $this->costo = $this->valor;
-                        $this->caso = "Normal";
-                    }
                     $this->saldo = $this->saldo - $this->costo;
                     $this->obtenerSaldo();
                     $this->ultimopago = $this->tiempo->time();
+                    $this->guardoCole($colectivo);
+                    $this->trasbordo = true;
                     return true;
 
             }
         }
-    
     }
+    
     
     public function obtenerCosto(){
         return $this->costo;
@@ -155,9 +150,30 @@ class Tarjeta implements TarjetaInterface {
         return $this->tipo;
     }
 
-    public function esTrasbordo($colectivo):boolean{
-        if($this->ultimalinea == $colectivo->linea()){
-            return false;
-        }
+    public function haytrans(ColectivoInterface $colectivo){
+        $saldoSuf = ( round( ($this->valor / 3), 3 ) + abs( $this->viajesplus - 2 ) * $this->valor ) < $this->saldo;
+		return ( $this->esTrasbordo( $colectivo ) && $this->tiempoValido() && $this->trasbordo && $saldoSuf );
     }
+
+	public function esTrasbordo(ColectivoInterface $colectivo) {	
+		return (($this->lineaAnterior != $colectivo->linea()) || ($this->numeroAnterior != $colectivo->numero()));
+    }
+    public function tiempoValido() { 
+		if ( $this->intervalo_trasbordo() ) {
+			return ($this->tiempo->time() - $this->ultimopago < 5400);
+		}
+		return ($this->tiempo->time() - $this->ultimopago < 3600);
+    }
+    public function intervalo_trasbordo() {
+		$sabado = date( 'w', $this->tiempo->time() ) == 6 && (date( 'G', $this->tiempo->time() ) >= 14 && date( 'G', $this->tiempo->time() ) < 22);
+		$domingo = date( 'w', $this->tiempo->time() ) == 0 && (date( 'G', $this->tiempo->time() ) >= 6 && date( 'G', $this->tiempo->time() ) < 22);
+		$noche = date( 'G', $this->tiempo->time() ) >= 22 && date( 'G', $this->tiempo->time() ) < 6;
+		return ($sabado || $domingo || $noche);
+    }
+    public function guardoCole($colectivo){
+        $this->lineaAnterior = $colectivo->linea();
+		$this->numeroAnterior = $colectivo->numero();
+    }
+
 }
+
