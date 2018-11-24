@@ -9,8 +9,12 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
     protected $tiempo_de_espera = 300;
     
     public function obtenerValorBoleto(){
-        if ($this->medioDisponible()) return $this->valor/2;
-        else return $this->valor;
+        if ($this->medioDisponible()){
+            return ($this->valor)/2;
+        } 
+        else {
+            return $this->valor;
+        }
     }
 
     public function pagarTarjeta($colectivo){
@@ -126,7 +130,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                         $this->guardoCole($colectivo);
                         $this->trasbordo = true;
                         return true;
-                }    
+                    }    
             }   
         }
     }
@@ -152,7 +156,6 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
           return TRUE;
         }
         return FALSE;
-
     }
 
     public function tiempoDeEsperaUltimoMedioCumplido(){
@@ -167,7 +170,6 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
              return TRUE;
         }
         return FALSE;
-
     }
     public function obtenerTiempoDeEspera(){
         return $this->tiempo_de_espera;
