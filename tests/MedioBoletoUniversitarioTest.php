@@ -11,6 +11,7 @@ class MedioBoletoUniversitarioTest extends TestCase {
      */
     public function testmedioboletouniversitarioTiempo() {
         $tiempo = new TiempoFalso();
+        $tiempo->avanzar(36000);
         $medioboleto = new TarjetaMedioBoletoUniversitario($tiempo, null);
         $colectivo = new Colectivo("mixta","103",420);
         $colectivo2 = new Colectivo("mixta","102",421);
