@@ -74,7 +74,7 @@ class MedioBoletoTest extends TestCase {
         $medioboleto->gastarPlus();
         $this->assertEquals($medioboleto->obetenerPlus(),0);
         $medioboleto->pagarTarjeta($colectivo);
-        $this->assertEquals($medioboleto->pagarTarjeta(),false);
+        $this->assertEquals($medioboleto->pagarTarjeta($colectivo),false);
     }
 
     public function testMedioboletotrasbordoNormal(){
