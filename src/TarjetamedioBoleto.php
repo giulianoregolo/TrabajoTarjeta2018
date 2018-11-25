@@ -39,7 +39,7 @@ class TarjetamedioBoleto extends Tarjeta {
         else{
             switch($this->viajesplus){
                 case 0:
-                    $this->costoPlus = $this->valor*2;
+                    $this->costoPlus = 14.80+14.80;
                     if($this->saldo < $this->costo){
                         return false;
                     }
@@ -68,7 +68,7 @@ class TarjetamedioBoleto extends Tarjeta {
                     }
 
                 case 1:
-                    $this->costoPlus = $this->valor;
+                    $this->costoPlus = 14.80;
                     if($this->saldo < $this->costo){
                         return false;
                     }

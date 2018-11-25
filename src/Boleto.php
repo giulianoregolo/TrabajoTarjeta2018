@@ -22,6 +22,8 @@ class Boleto implements BoletoInterface {
 
     protected $tipoBoleto;
 
+    protected $costoplus;
+
 
     public function __construct($colectivo,$tarjeta) {
         $this->valor = $tarjeta->obtenervalor();
@@ -33,6 +35,7 @@ class Boleto implements BoletoInterface {
         $this->canViajesplus = $tarjeta->obetenerPlus();
         $this->costoTotal = $tarjeta->obtenerCosto();
         $this->tipoBoleto = $tarjeta->caso;
+        $this->costoplus = $tarjeta->obtenerCostoPlus();
     }
 
     public function obtenerValor() {
@@ -67,7 +70,7 @@ class Boleto implements BoletoInterface {
         return $this->tipoBoleto;
     } 
     public function obtenerCostoPlus(){
-        return (14.8 * $this->canViajesplus);
+        return $this->costoplus;
     }
 
 }

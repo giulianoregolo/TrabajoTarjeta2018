@@ -5,17 +5,22 @@ namespace TrabajoTarjeta;
 class TarjetaMedioBoletoUniversitario extends Tarjeta {
     protected $valor = 14.80;
     protected $ultimopago;
+    public $tipo = "Medio Universitario";
     protected $cantidadpagos = 0;
+    protected $tiempo_de_espera = 300;
     
     public function obtenerValorBoleto(){
-        if ($this->medioDisponible()) return $this->valor/2;
-        else return $this->valor;
+        if ($this->medioDisponible()){
+            return ($this->valor)/2;
+        } 
+        else {
+            return $this->valor;
+        }
     }
 
     public function pagarTarjeta($colectivo){
-        $this->valor = 14.80;
-        $this->costo = $this->obtenerValorBoleto();
-        if($this->saldo < $this->costo){
+        $valorAux = $this->obtenerValorBoleto();
+        if($this->saldo < $valorAux){
             switch($this->viajesplus){
                 case 0:
                     return false;
@@ -38,15 +43,15 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
         else{
             switch($this->viajesplus){
                 case 0:
-                    $this->costoPlus = $this->valor*2;
-                    $this->costo = $this->costo + $this->costoPlus;
+                    $this->costoPlus = 14.80+14.80;
+                    $this->costo = $valorAux + $this->costoPlus;
                     if($this->saldo < $this->costo){
                         return false;
                     }
                     else{
                         if($this->haytrans($colectivo)){
-                            $this->valor = ($this->valor /33)*10;
-                            $this->costo = $this->costoPlus + $this->valor;
+                            $valorAux = ($valorAux *33)/100;
+                            $this->costo = $this->costoPlus + $valorAux;
                             $this->saldo = $this->saldo - $this->costo;
                             $this->caso = "Trasbordo";
                             $this->ultimopago = $this->tiempo->time();
@@ -73,15 +78,14 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                     }
 
                 case 1:
-                    $this->costoPlus = $this->valor;
-                    $this->costo= $this->costo+$this->costoPlus;
+                    $this->costoPlus = 14.80;
                     if($this->saldo < $this->this->costo){
                         return false;
                     }
                     else{
                         if($this->haytrans($colectivo)){
-                            $this->valor = ($this->valor /33)*10;
-                            $this->costo = $this->costoPlus + $this->valor;
+                            $valorAux = ($valorAux *33)/100;
+                            $this->costo = $this->costoPlus + $valorAux;
                             $this->saldo = $this->saldo - $this->costo;
                             $this->caso = "Trasbordo";
                             $this->ultimopago = $this->tiempo->time();
@@ -94,6 +98,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                             return true;
                         }
                         else{
+                            $this->costo=$this->costoPlus + $valorAux;
                             $this->saldo = $this->saldo - $this->costo;
                             $this->caso = "pagandoPlus";
                             $this->ultimopago = $this->tiempo->time();
@@ -108,8 +113,8 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                     }
                 case 2:
                     if($this->haytrans($colectivo)){ 
-                        $this->valor = ($this->valor /33)*10;
-                        $this->costo = $this->costoPlus + $this->valor;
+                        $valorAux = ($valorAux *33)/100;
+                        $this->costo = $this->costoPlus + $valorAux;
                         $this->saldo = $this->saldo - $this->costo;
                         $this->caso = "Trasbordo";
                         $this->ultimopago = $this->tiempo->time();
@@ -118,15 +123,14 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                         return true;
                     }
                     else{
-                        $this->valor = 14.80;
-                        $this->costo = $this->costoPlus + $this->valor;
+                        $this->costo = $this->costoPlus + $valorAux;
                         $this->saldo = $this->saldo - $this->costo;
-                        $this->caso = "Normal";
+                        $this->caso = "Medio Universitario";
                         $this->ultimopago = $this->tiempo->time();
                         $this->guardoCole($colectivo);
                         $this->trasbordo = true;
                         return true;
-                }    
+                    }    
             }   
         }
     }
@@ -142,15 +146,16 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
     }
 
     public function medioDisponible(){
-        if($this->cantidadpagos < 2){
-            return TRUE;
+        if($this->cantidadpagos < 2 ){
+            if($this->tiempoDeEsperaCumplido()){
+                return True;
+            }    
         }
         if($this->tiempoDeEsperaUltimoMedioCumplido()){
           $this->cantidadpagos = 0;
           return TRUE;
         }
         return FALSE;
-
     }
 
     public function tiempoDeEsperaUltimoMedioCumplido(){
@@ -165,7 +170,6 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
              return TRUE;
         }
         return FALSE;
-
     }
     public function obtenerTiempoDeEspera(){
         return $this->tiempo_de_espera;
