@@ -179,11 +179,11 @@ class Tarjeta implements TarjetaInterface {
         return $this->tipo;
     }
 
-    public function haytrans(ColectivoInterface $colectivo){
+    public function haytrans( $colectivo){
 		return ( $this->esTrasbordo( $colectivo ) && $this->tiempoValido() && $this->trasbordo);
     }
 
-	public function esTrasbordo(ColectivoInterface $colectivo) {	
+	public function esTrasbordo( $colectivo) {	
 		return (($this->lineaAnterior != $colectivo->linea()) || ($this->numeroAnterior != $colectivo->numero()));
     }
     public function tiempoValido() { 
