@@ -16,10 +16,12 @@ class MedioBoletoUniversitarioTest extends TestCase {
         $colectivo2 = new Colectivo("mixta","102",421);
         $medioboleto->recargar(50.0);
         $medioboleto->pagarTarjeta($colectivo);
+        $this->assertEquals($medioboleto->obtenerCosto(), 7.40);
         $tiempo->avanzar(240);
         $medioboleto->pagarTarjeta($colectivo2);
+        $this->assertEquals($medioboleto->obtenerCosto(), 2.442);
         $tiempo->avanzar(7200);
         $medioboleto->pagarTarjeta($colectivo);
-        $this->assertEquals($medioboleto->obtenerCosto(), 24.642);
+        $this->assertEquals($medioboleto->obtenerCosto(), 14.80);
     }
 }
