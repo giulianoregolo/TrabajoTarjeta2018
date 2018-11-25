@@ -17,7 +17,7 @@ interface Boleto_Interface {
 
     public function obtener_saldo();
 
-    public function obtenertipo_tarjeta();
+    public function obtener_tipo_tarjeta();
 
     public function obtener_costo_total();
 
