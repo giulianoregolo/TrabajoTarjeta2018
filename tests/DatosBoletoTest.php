@@ -14,7 +14,7 @@ class Datos_Boleto_Test extends TestCase {
         $boleto = $colectivo->pagar_con( $tarjeta );
         $this->assertEquals( $boleto->obtener_valor(), 14.80 );
         $this->assertEquals( $boleto->obtener_saldo(), 5.20 );
-        $this->assertEquals( $boleto->obtener_tarjeta_id(), $tarjeta->obtenerId() );
+        $this->assertEquals( $boleto->obtener_tarjeta_id(), $tarjeta->obtener_id() );
         $this->assertEquals( $boleto->obtener_linea(), '103' );
         $this->assertEquals( $boleto->obtener_tipo_boleto(), 'Normal' );
     }
@@ -25,7 +25,7 @@ class Datos_Boleto_Test extends TestCase {
         $boleto = $colectivo->pagar_con( $tarjeta );
         $this->assertEquals( $boleto->obtener_costo_total(), 0.0 );
         $this->assertEquals( $boleto->obtener_saldo(), 0.0 );
-        $this->assertEquals($boleto->obtener_tarjeta_id(), $tarjeta->obtenerId() );
+        $this->assertEquals($boleto->obtener_tarjeta_id(), $tarjeta->obtener_id() );
         $this->assertEquals($boleto->obtener_linea(), '103' );
         $this->assertEquals($boleto->obtener_tipo_boleto(), 'viajeplus' );
     }

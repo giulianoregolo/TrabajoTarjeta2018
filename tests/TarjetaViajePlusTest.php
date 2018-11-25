@@ -25,7 +25,7 @@ class Tarjeta_Viaje_Plus_Test extends TestCase {
         $tarjeta = new Tarjeta( $tiempo_prueba, NULL );
 		$colectivo = new Colectivo( 'mixta', '103', 420 );
         $colectivo->pagar_con( $tarjeta );
-        $this->assertEquals( $tarjeta->obetener_´plus(), 1 );
+        $this->assertEquals( $tarjeta->obtener_plus(), 1 );
         $colectivo->pagar_con( $tarjeta );
         $this->assertEquals( $tarjeta->obetener_plus(), 0 );
         $this->assertEquals( $colectivo->pagar_con( $tarjeta ), False );
