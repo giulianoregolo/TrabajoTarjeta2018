@@ -19,8 +19,8 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
     }
 
     public function pagarTarjeta($colectivo){
-        $this->costo = $this->obtenerValorBoleto();
-        if($this->saldo < $this->costo){
+        $valorAux = $this->obtenerValorBoleto();
+        if($this->saldo < $valorAux){
             switch($this->viajesplus){
                 case 0:
                     return false;
@@ -44,14 +44,14 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
             switch($this->viajesplus){
                 case 0:
                     $this->costoPlus = 14.80+14.80;
-                    $this->costo = $this->costo + $this->costoPlus;
+                    $this->costo = $valorAux + $this->costoPlus;
                     if($this->saldo < $this->costo){
                         return false;
                     }
                     else{
                         if($this->haytrans($colectivo)){
-                            $this->valor = ($this->valor /33)*10;
-                            $this->costo = $this->costoPlus + $this->valor;
+                            $valorAux = ($valorAux /33)*10;
+                            $this->costo = $this->costoPlus + $valorAux;
                             $this->saldo = $this->saldo - $this->costo;
                             $this->caso = "Trasbordo";
                             $this->ultimopago = $this->tiempo->time();
@@ -79,14 +79,13 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
 
                 case 1:
                     $this->costoPlus = 14.80;
-                    $this->costo= $this->costo+$this->costoPlus;
                     if($this->saldo < $this->this->costo){
                         return false;
                     }
                     else{
                         if($this->haytrans($colectivo)){
-                            $this->valor = ($this->valor /33)*10;
-                            $this->costo = $this->costoPlus + $this->valor;
+                            $valorAux = ($valorAux /33)*10;
+                            $this->costo = $this->costoPlus + $valorAux;
                             $this->saldo = $this->saldo - $this->costo;
                             $this->caso = "Trasbordo";
                             $this->ultimopago = $this->tiempo->time();
@@ -99,6 +98,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                             return true;
                         }
                         else{
+                            $this->costo=$this->costoPlus + $valorAux;
                             $this->saldo = $this->saldo - $this->costo;
                             $this->caso = "pagandoPlus";
                             $this->ultimopago = $this->tiempo->time();
@@ -113,8 +113,8 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                     }
                 case 2:
                     if($this->haytrans($colectivo)){ 
-                        $this->valor = ($this->valor /33)*10;
-                        $this->costo = $this->costoPlus + $this->valor;
+                        $valorAux = ($valorAux /33)*10;
+                        $this->costo = $this->costoPlus + $valorAux;
                         $this->saldo = $this->saldo - $this->costo;
                         $this->caso = "Trasbordo";
                         $this->ultimopago = $this->tiempo->time();
@@ -123,7 +123,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                         return true;
                     }
                     else{
-                        $this->costo = $this->costoPlus + $this->valor;
+                        $this->costo = $this->costoPlus + $valorAux;
                         $this->saldo = $this->saldo - $this->costo;
                         $this->caso = "Medio Universitario";
                         $this->ultimopago = $this->tiempo->time();
