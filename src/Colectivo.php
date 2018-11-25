@@ -27,7 +27,7 @@ class Colectivo implements Colectivo_Interface {
     }
 
     public function pagar_con( Tarjeta_Interface $tarjeta ) {
-        if( ! $tarjeta->pagarTarjeta($this) ) {
+        if( ! $tarjeta->pagarTarjeta( $this ) ) {
             return false;
         }
         return new Boleto( $this, $tarjeta );
