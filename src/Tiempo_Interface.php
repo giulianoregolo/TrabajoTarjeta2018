@@ -1,6 +1,6 @@
 <?php
 namespace TrabajoTarjeta;
 
-interface TiempoInterface {
+interface Tiempo_Interface {
     public function time();
 }

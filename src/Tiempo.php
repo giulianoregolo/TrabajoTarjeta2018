@@ -2,7 +2,7 @@
 
 namespace TrabajoTarjeta;
 
-class Tiempo implements TiempoInterface {
+class Tiempo implements Tiempo_Interface {
 
     protected $feriados = array(
         '19-11-18',
@@ -69,7 +69,7 @@ class Tiempo_Falso implements Tiempo_Interface {
     public function time() {
         return $this->tiempo;
     }
-    public function esFeriado() {
+    public function es_feriado() {
         $fecha = date( 'd-m', $this->tiempo );
         return in_array( $fecha, $this->feriados );
     }
