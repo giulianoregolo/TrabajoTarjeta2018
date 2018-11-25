@@ -90,14 +90,16 @@ class Tarjeta implements TarjetaInterface {
                             $this->ultimopago = $this->tiempo->time();
                             $this->guardoCole($colectivo);
                             $this->trasbordo = false;
+                            $this->viajesplus = 2;
                             return true;
                         }
                         else{
                             $this->saldo = $this->saldo - $this->costo;
                             $this->caso = "pagandoPlus";
                             $this->ultimopago = $this->tiempo->time();
-                            $this->trasbordo = true;
                             $this->guardoCole($colectivo);
+                            $this->trasbordo = true;
+                            $this->viajesplus = 2;
                             return true;
                         }
                     }
@@ -117,6 +119,7 @@ class Tarjeta implements TarjetaInterface {
                             $this->ultimopago = $this->tiempo->time();
                             $this->guardoCole($colectivo);
                             $this->trasbordo = false;
+                            $this->viajesplus = 2;
                             return true;
                         }
                         else{
@@ -125,6 +128,7 @@ class Tarjeta implements TarjetaInterface {
                             $this->ultimopago = $this->tiempo->time();
                             $this->guardoCole($colectivo);
                             $this->trasbordo = true;
+                            $this->viajesplus = 2;
                             return true;
                         }
                     }

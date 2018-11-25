@@ -9,6 +9,7 @@ class TarjetamedioBoleto extends Tarjeta {
     protected $ultimopago = null;
 
     public function pagarTarjeta($colectivo){
+        
         if ($this->tiempoDeEsperaCumplido()){
 		$this->valor = $this->valor/2; 	
         }
@@ -51,6 +52,7 @@ class TarjetamedioBoleto extends Tarjeta {
                             $this->ultimopago = $this->tiempo->time();
                             $this->guardoCole($colectivo);
                             $this->trasbordo = false;
+                            $this->viajesplus = 2;
                             return true;
                         }
                         else{
@@ -58,8 +60,9 @@ class TarjetamedioBoleto extends Tarjeta {
                             $this->saldo = $this->saldo - $this->costo;
                             $this->caso = "pagandoPlus";
                             $this->ultimopago = $this->tiempo->time();
-                            $this->trasbordo = true;
                             $this->guardoCole($colectivo);
+                            $this->trasbordo = true;
+                            $this->viajesplus = 2;
                             return true;
                         }
                     }
@@ -78,6 +81,7 @@ class TarjetamedioBoleto extends Tarjeta {
                             $this->ultimopago = $this->tiempo->time();
                             $this->guardoCole($colectivo);
                             $this->trasbordo = false;
+                            $this->viajesplus = 2;
                             return true;
                         }
                         else{
@@ -87,6 +91,7 @@ class TarjetamedioBoleto extends Tarjeta {
                             $this->ultimopago = $this->tiempo->time();
                             $this->guardoCole($colectivo);
                             $this->trasbordo = true;
+                            $this->viajesplus = 2;
                             return true;
                         }
                     }
