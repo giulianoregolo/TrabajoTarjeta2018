@@ -203,10 +203,11 @@ class Tarjeta implements TarjetaInterface {
 		return ($this->tiempo->time() - $this->ultimopago < 3600);
     }
     public function intervalo_trasbordo() {
+        $feriado = $this->tiempo->esFeriado();
 		$sabado = date( 'w', $this->tiempo->time() ) == 6 && (date( 'G', $this->tiempo->time() ) >= 14 && date( 'G', $this->tiempo->time() ) < 22);
 		$domingo = date( 'w', $this->tiempo->time() ) == 0 && (date( 'G', $this->tiempo->time() ) >= 6 && date( 'G', $this->tiempo->time() ) < 22);
 		$noche = date( 'G', $this->tiempo->time() ) >= 22 && date( 'G', $this->tiempo->time() ) < 6;
-		return ($sabado || $domingo || $noche);
+		return ($sabado || $domingo || $noche || $feriado);
     }
     public function guardoCole($colectivo){
         $this->lineaAnterior = $colectivo->linea();
