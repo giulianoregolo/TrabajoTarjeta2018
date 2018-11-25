@@ -23,7 +23,7 @@ class MedioBoletoUniversitarioTest extends TestCase {
         $this->assertEquals($medioboleto->obtenerCosto(), 2.442);
         $tiempo->avanzar(7200);
         $medioboleto->pagarTarjeta($colectivo);
-        $this->assertEquals($medioboleto->obtenerCosto(), 7.40);
+        $this->assertEquals($medioboleto->obtenerCosto(), 14.80);
     }
     public function testMedioboletoUniViajeplus(){
         $tiempo = new TiempoFalso();
