@@ -103,7 +103,7 @@ class TarjetamedioBoleto extends Tarjeta {
                         $this->caso = "Trasbordo";
                         $this->ultimopago = $this->tiempo->time();
                         $this->guardoCole($colectivo);
-                        $this->trasbordo = flase;
+                        $this->trasbordo = false;
                         return true;
                     }
                     else{
