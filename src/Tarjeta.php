@@ -31,7 +31,6 @@ class Tarjeta implements TarjetaInterface {
 		else {
 	   		$this->saldo = $this->saldo + $monto;
 		}
-
 		return True;	    
 	  }
 	  else{
@@ -159,7 +158,6 @@ class Tarjeta implements TarjetaInterface {
         }
     }
     
-    
     public function obtenerCosto(){
         return $this->costo;
         
@@ -196,12 +194,14 @@ class Tarjeta implements TarjetaInterface {
 	public function esTrasbordo( $colectivo) {	
 		return (($this->lineaAnterior != $colectivo->linea()) || ($this->numeroAnterior != $colectivo->numero()));
     }
+
     public function tiempoValido() { 
 		if ( $this->intervalo_trasbordo() ) {
 			return ($this->tiempo->time() - $this->ultimopago < 5400);
 		}
 		return ($this->tiempo->time() - $this->ultimopago < 3600);
     }
+
     public function intervalo_trasbordo() {
         $feriado = $this->tiempo->esFeriado();
 		$sabado = date( 'w', $this->tiempo->time() ) == 6 && (date( 'G', $this->tiempo->time() ) >= 14 && date( 'G', $this->tiempo->time() ) < 22);
@@ -209,6 +209,7 @@ class Tarjeta implements TarjetaInterface {
 		$noche = date( 'G', $this->tiempo->time() ) >= 22 && date( 'G', $this->tiempo->time() ) < 6;
 		return ($sabado || $domingo || $noche || $feriado);
     }
+
     public function guardoCole($colectivo){
         $this->lineaAnterior = $colectivo->linea();
 		$this->numeroAnterior = $colectivo->numero();

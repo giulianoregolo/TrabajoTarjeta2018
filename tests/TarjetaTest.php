@@ -18,6 +18,21 @@ class TarjetaTest extends TestCase {
 
         $this->assertTrue($tarjeta->recargar(20));
         $this->assertEquals($tarjeta->obtenerSaldo(), 30);
+
+        $this->assertTrue($tarjeta->recargar(30));
+        $this->assertEquals($tarjeta->obtenerSaldo(), 50);
+
+        $this->assertTrue($tarjeta->recargar(50));
+        $this->assertEquals($tarjeta->obtenerSaldo(), 100);
+
+        $this->assertTrue($tarjeta->recargar(100));
+        $this->assertEquals($tarjeta->obtenerSaldo(), 200);
+
+        $this->assertTrue($tarjeta->recargar(510.15));
+        $this->assertEquals($tarjeta->obtenerSaldo(),710.15 );
+
+        $this->assertTrue($tarjeta->recargar(962.59));
+        $this->assertEquals($tarjeta->obtenerSaldo(), 1672.74);
     }
 
     /**
