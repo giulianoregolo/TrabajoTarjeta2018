@@ -52,7 +52,7 @@ class Tarjeta_Medio_Boleto_Universitario extends Tarjeta {
                         return false;
                     } else {
                         if ( $this->hay_trans( $colectivo ) ) {
-                            $valor_aux = ( $valorAux *33 ) / 100;
+                            $valor_aux = ( $valor_aux *33 ) / 100;
                             $this->costo = $this->costo_plus + $valor_aux;
                             $this->saldo = $this->saldo - $this->costo;
                             $this->caso = 'Trasbordo';
@@ -84,7 +84,7 @@ class Tarjeta_Medio_Boleto_Universitario extends Tarjeta {
                         return false;
                     } else {
                         if ( $this->hay_trans( $colectivo ) ) {
-                            $valor_aux = ( $valorAux * 33 ) / 100;
+                            $valor_aux = ( $valor_aux * 33 ) / 100;
                             $this->costo = $this->costo_plus + $valor_aux;
                             $this->saldo = $this->saldo - $this->costo;
                             $this->caso = 'Trasbordo';

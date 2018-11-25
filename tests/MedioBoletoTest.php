@@ -12,7 +12,7 @@ class medio_boletoTest extends TestCase {
     public function test_pagar_monto_estandar() {
         $tiempo = new Tiempo_Falso();
         $tiempo->avanzar( 36000 );
-        $medio_boleto = new Tarjeta_Medio_boleto( $tiempo, null );
+        $medio_boleto = new Tarjeta_Medio_Boleto( $tiempo, null );
         $colectivo = new Colectivo( 'mixta', '133', 420 );
         $medio_boleto->recargar( 50.0 );
         $this->assertEquals( $medio_boleto->pagar_tarjeta( $colectivo ), True );
