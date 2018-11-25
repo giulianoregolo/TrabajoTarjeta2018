@@ -1,5 +1,8 @@
 <?php
 namespace TrabajoTarjeta;
+
+include ( 'ColectivoInterface.php' );
+
 class Colectivo implements Colectivo_Interface {
 
     protected $empresa;
