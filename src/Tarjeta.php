@@ -53,6 +53,7 @@ class Tarjeta implements TarjetaInterface {
     }
     
     public function pagarTarjeta( $colectivo){
+        $this->valor=14.80;
         if($this->saldo < $this->valor){
             switch($this->viajesplus){
                 case 0:
