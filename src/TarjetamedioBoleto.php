@@ -9,7 +9,7 @@ class TarjetamedioBoleto extends Tarjeta {
     protected $ultimopago = null;
 
     public function pagarTarjeta($colectivo){
-        if ($this->tiempoDeEsperaCumplido() && $this->ultimopago != null){
+        if ($this->tiempoDeEsperaCumplido()){
 		$this->valor = $this->valor/2; 	
         }
         else{
@@ -39,7 +39,6 @@ class TarjetamedioBoleto extends Tarjeta {
             switch($this->viajesplus){
                 case 0:
                     $this->costoPlus = $this->valor*2;
-                    $this->costo = $this->costoPlus + $this->valor;
                     if($this->saldo < $this->costo){
                         return false;
                     }
@@ -55,6 +54,7 @@ class TarjetamedioBoleto extends Tarjeta {
                             return true;
                         }
                         else{
+                            $this->costo = $this->costoPlus + $this->valor;
                             $this->saldo = $this->saldo - $this->costo;
                             $this->caso = "pagandoPlus";
                             $this->ultimopago = $this->tiempo->time();
@@ -66,7 +66,6 @@ class TarjetamedioBoleto extends Tarjeta {
 
                 case 1:
                     $this->costoPlus = $this->valor;
-                    $this->costo = $this->costoPlus + $this->valor;
                     if($this->saldo < $this->costo){
                         return false;
                     }
@@ -82,6 +81,7 @@ class TarjetamedioBoleto extends Tarjeta {
                             return true;
                         }
                         else{
+                            $this->costo = $this->costoPlus + $this->valor;
                             $this->saldo = $this->saldo - $this->costo;
                             $this->caso = "pagandoPlus";
                             $this->ultimopago = $this->tiempo->time();
@@ -102,7 +102,7 @@ class TarjetamedioBoleto extends Tarjeta {
                         return true;
                     }
                     else{
-                        $this->costo = $this->costoPlus + $this->valor;
+                        $this->costo = $this->valor;
                         $this->saldo = $this->saldo - $this->costo;
                         $this->caso = "Medio";
                         $this->ultimopago = $this->tiempo->time();
@@ -129,5 +129,5 @@ class TarjetamedioBoleto extends Tarjeta {
     }
     public function obtenerUltimaFechaPagada(){
         return $this->ultimopago;
-      }
+    }
 }

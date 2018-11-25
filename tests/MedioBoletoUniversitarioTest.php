@@ -10,7 +10,7 @@ class MedioBoletoUniversitarioTest extends TestCase {
      * Comprueba que el medio boleto page la mitad que una tarjeta normal en un pago estandar.
      */
     public function testmedioboletouniversitarioTiempo() {
-        $tiempo = new Tiempo();
+        $tiempo = new TiempoFalso();
         $medioboleto = new TarjetaMedioBoletoUniversitario($tiempo, null);
         $colectivo = new Colectivo("mixta","103",420);
         $medioboleto->recargar(50.0);
