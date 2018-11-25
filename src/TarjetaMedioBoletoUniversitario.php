@@ -59,7 +59,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                             $this->trasbordo = false;
                             if ($this->cantidadpagos < 2){
                                 $this->cantidadpagos = $this->cantidadpagos + 1;
-                                }
+                            }
                             $this->viajesplus = 2;
                             return true;
                         }
@@ -71,7 +71,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                             $this->guardoCole($colectivo);
                             if ($this->cantidadpagos < 2){
                                 $this->cantidadpagos = $this->cantidadpagos + 1;
-                                }
+                            }
                             return true;
                             $this->viajesplus = 2;
                         }
@@ -93,7 +93,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                             $this->trasbordo = false;
                             if ($this->cantidadpagos < 2){
                                 $this->cantidadpagos = $this->cantidadpagos + 1;
-                                }
+                            }
                             $this->viajesplus = 2;
                             return true;
                         }
@@ -106,7 +106,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                             $this->guardoCole($colectivo);
                             if ($this->cantidadpagos < 2){
                                 $this->cantidadpagos = $this->cantidadpagos + 1;
-                                }
+                            }
                             $this->viajesplus = 2;
                             return true;
                         }
@@ -122,7 +122,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                         $this->trasbordo = false;
                         if ($this->cantidadpagos < 2){
                             $this->cantidadpagos = $this->cantidadpagos + 1;
-                            }
+                        }
                         return true;
                     }
                     else{
@@ -134,7 +134,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                         $this->trasbordo = true;
                         if ($this->cantidadpagos < 2){
                             $this->cantidadpagos = $this->cantidadpagos + 1;
-                            }
+                        }
                         return true;
                     }    
             }   
