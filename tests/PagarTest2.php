@@ -14,18 +14,21 @@ class PagarTest2 extends TestCase {
         $tarjeta = new Tarjeta($tiempoprueba, NULL);
         $colectivo = new Colectivo("mixta","103",420);
         $tarjeta->recargar(50.0);
-        $this->assertEquals($tarjeta->obtenerSaldo,35.2);
+        $this->assertEquals($tarjeta->obtenerSaldo(),35.2);
     }
 
     /**
-     * Comprueba que la tarjeta puede pagar sin saldo.
+     * Comprueba que la tarjeta puede pagar sin saldo hasta dos veces.
      */
     public function testpagarmontoSinsaldo() {
         $tiempoprueba = new Tiempo();
         $tarjeta = new Tarjeta($tiempoprueba, NULL);
 		$colectivo = new Colectivo("mixta","103",420);
-        $boleto = $colectivo->pagarCon( $tarjeta);
-        $this->assertEquals($tarjeta->obetenerPlus,1);
-        $this->assertEquals($tarjeta->obtenerSaldo,0.0);
+        $boleto = $colectivo->pagarCon($tarjeta);
+        $this->assertEquals($tarjeta->obetenerPlus(),1);
+        $this->assertEquals($tarjeta->obtenerSaldo(),0.0);
+        $boleto = $colectivo->pagarCon($tarjeta);
+        $this->assertEquals($tarjeta->obtenerPlus(),0);
+        $this->assertEquals($tarjeta->obtenerSaldo(),0.0);
     }    
 }
