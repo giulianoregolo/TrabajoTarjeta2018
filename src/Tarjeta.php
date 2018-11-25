@@ -185,6 +185,10 @@ class Tarjeta implements TarjetaInterface {
         return $this->tipo;
     }
 
+    public function obtenerhora(){
+        return $this->ultimopago;
+    }
+
     public function haytrans( $colectivo){
 		return ( $this->esTrasbordo( $colectivo ) && $this->tiempoValido() && $this->trasbordo);
     }
