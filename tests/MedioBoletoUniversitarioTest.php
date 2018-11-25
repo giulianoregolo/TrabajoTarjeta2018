@@ -13,10 +13,13 @@ class MedioBoletoUniversitarioTest extends TestCase {
         $tiempo = new TiempoFalso();
         $medioboleto = new TarjetaMedioBoletoUniversitario($tiempo, null);
         $colectivo = new Colectivo("mixta","103",420);
+        $colectivo2 = new Colectivo("mixta","102",421);
         $medioboleto->recargar(50.0);
         $medioboleto->pagarTarjeta($colectivo);
+        $tiempo->avanzar(240);
+        $medioboleto->pagarTarjeta($colectivo2);
+        $tiempo->avanzar(7200);
         $medioboleto->pagarTarjeta($colectivo);
-        $medioboleto->pagarTarjeta($colectivo);
-        $this->assertEquals($medioboleto->obtenerSaldo(), 20.4);
+        $this->assertEquals($medioboleto->obtenerCosto(), 24.642);
     }
 }
