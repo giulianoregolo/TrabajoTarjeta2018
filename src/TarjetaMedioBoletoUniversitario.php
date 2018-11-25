@@ -79,7 +79,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
 
                 case 1:
                     $this->costoPlus = 14.80;
-                    if($this->saldo < $this->this->costo){
+                    if($this->saldo < $this->costo){
                         return false;
                     }
                     else{
