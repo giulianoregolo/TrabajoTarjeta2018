@@ -5,6 +5,7 @@ namespace TrabajoTarjeta;
 class TarjetaMedioBoletoUniversitario extends Tarjeta {
     protected $valor = 14.80;
     protected $ultimopago;
+    public $tipo = "Medio Universitario";
     protected $cantidadpagos = 0;
     protected $tiempo_de_espera = 300;
     
@@ -122,10 +123,9 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                         return true;
                     }
                     else{
-                        $this->valor = 14.80;
                         $this->costo = $this->costoPlus + $this->valor;
                         $this->saldo = $this->saldo - $this->costo;
-                        $this->caso = "Normal";
+                        $this->caso = "Medio Universitario";
                         $this->ultimopago = $this->tiempo->time();
                         $this->guardoCole($colectivo);
                         $this->trasbordo = true;
