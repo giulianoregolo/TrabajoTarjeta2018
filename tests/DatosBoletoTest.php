@@ -20,7 +20,7 @@ class Datos_Boleto_Test extends TestCase {
     }
     public function test_boleto_plus() {
         $tiempo_prueba = new Tiempo();
-        $tarjeta = new Tarjeta( $tiempoprueba, NULL );
+        $tarjeta = new Tarjeta( $tiempo_prueba, NULL );
         $colectivo = new Colectivo( 'mixta', '103', 420 );
         $boleto = $colectivo->pagar_con( $tarjeta );
         $this->assertEquals( $boleto->obtener_costo_total(), 0.0 );
