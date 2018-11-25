@@ -28,7 +28,7 @@ class PagarTest2 extends TestCase {
         $this->assertEquals($tarjeta->obetenerPlus(),1);
         $this->assertEquals($tarjeta->obtenerSaldo(),0.0);
         $boleto = $colectivo->pagarCon($tarjeta);
-        $this->assertEquals($tarjeta->obtenerPlus(),2);
+        $this->assertEquals($tarjeta->obtenerPlus(),0);
         $this->assertEquals($tarjeta->obtenerSaldo(),0.0);
     }    
 }
