@@ -2,7 +2,7 @@
 
 namespace TrabajoTarjeta;
 
-include ( 'TarjetaInterface.php' );
+include_once ( 'TarjetaInterface.php' );
 
 class Tarjeta implements Tarjeta_Interface {
 

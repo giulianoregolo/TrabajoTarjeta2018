@@ -2,7 +2,7 @@
 
 namespace TrabajoTarjeta;
 
-include ( 'TiempoInterface.php' );
+include_once ( 'TiempoInterface.php' );
 
 class Tiempo implements Tiempo_Interface {
 

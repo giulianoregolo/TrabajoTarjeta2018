@@ -1,7 +1,7 @@
 <?php
 namespace TrabajoTarjeta;
 
-include ( 'ColectivoInterface.php' );
+include_once ( 'ColectivoInterface.php' );
 
 class Colectivo implements Colectivo_Interface {
 
