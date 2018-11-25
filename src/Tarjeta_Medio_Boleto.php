@@ -120,7 +120,7 @@ class Tarjeta_Medio_Boleto extends Tarjeta {
     public function tiempo_de_espera_cumplido() {
         $ultimo_pago = $this->obtener_ultima_fecha_pagada();
         $fecha_actual = $this->tiempo->time();
-        $diferencia_fechas = $fecha_actual - $ultimopago;
+        $diferencia_fechas = $fecha_actual - $ultimo_pago;
         if( $diferencia_fechas >= $this->obtener_tiempo_de_espera() ) {
             return true;
         } else {

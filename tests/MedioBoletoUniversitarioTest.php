@@ -30,11 +30,11 @@ class medio_boletoUniversitarioTest extends TestCase {
         $tiempo->avanzar( 36000 );
         $medio_boleto = new Tarjeta_Medio_Boleto_Universitario( $tiempo, null );
         $colectivo = new Colectivo( 'mixta', '133', 420 );
-        $this->assertEquals( $medio_boleto->obtener_plus(), 2 );
+        $this->assertEquals( $medio_boleto->obtener_cantidad_viajes_plus(), 2 );
         $medio_boleto->pagar_tarjeta($colectivo);
-        $this->assertEquals( $medio_boleto->obtener_plus(), 1 );
+        $this->assertEquals( $medio_boleto->obtener_cantidad_viajes_plus(), 1 );
         $medio_boleto->gastar_plus();
-        $this->assertEquals( $medio_boleto->obtener_plus() ,0 );
+        $this->assertEquals( $medio_boleto->obtener_cantidad_viajes_plus() ,0 );
         $medio_boleto->pagar_tarjeta( $colectivo );
         $this->assertEquals( $medio_boleto->pagar_tarjeta( $colectivo ), false );
     }

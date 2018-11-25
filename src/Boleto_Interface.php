@@ -24,4 +24,6 @@ interface Boleto_Interface {
     public function obtener_tipo_boleto();
     
     public function obtener_costo_plus();
+
+    public function obtener_cantidad_viajes_plus();
 }

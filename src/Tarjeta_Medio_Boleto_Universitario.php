@@ -131,7 +131,7 @@ class Tarjeta_Medio_Boleto_Universitario extends Tarjeta {
                         $this->guardo_cole( $colectivo );
                         $this->trasbordo = true;
                         if ( $this->cantidad_pagos < 2 ) {
-                            $this->cantidad_pagos = $this->cantidadpagos + 1;
+                            $this->cantidad_pagos = $this->cantidad_pagos + 1;
                         }
                         return true;
                     }    
