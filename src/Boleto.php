@@ -8,19 +8,19 @@ class Boleto implements Boleto_Interface {
 
     protected $id;
 
-    protected $tipoTarjeta;
+    protected $tipo_tarjeta;
 
-    protected $costoTotal;
+    protected $costo_total;
 
     protected $linea;
 
     protected $saldo;
 
-    protected $canViajesplus;
+    protected $cantidad_viajes_plus;
 
-    protected $tipoBoleto;
+    protected $tipo_boleto;
 
-    protected $costoplus;
+    protected $costo_plus;
 
 
     public function __construct( $colectivo, $tarjeta ) {

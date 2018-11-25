@@ -1,11 +1,14 @@
 <?php
 namespace TrabajoTarjeta;
-class Colectivo implements ColectivoInterface {
+class Colectivo implements Colectivo_Interface {
+
     protected $empresa;
+
     protected $linea;
+
     protected $numero;
     
-    public function __construct($empresa, $linea, $numero) {
+    public function __construct( $empresa, $linea, $numero ) {
         $this->empresa = $empresa;
         $this->linea = $linea;
         $this->numero = $numero;
@@ -23,11 +26,11 @@ class Colectivo implements ColectivoInterface {
         return $this->numero;
     }
 
-    public function pagarCon(TarjetaInterface $tarjeta) {
-        if(!$tarjeta->pagarTarjeta($this)) {
+    public function pagar_con( Tarjeta_Interface $tarjeta ) {
+        if( ! $tarjeta->pagarTarjeta($this) ) {
             return false;
         }
-        return new Boleto($this,$tarjeta);
+        return new Boleto( $this, $tarjeta );
     }
 
 }
