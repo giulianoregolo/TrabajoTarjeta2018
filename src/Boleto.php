@@ -2,7 +2,7 @@
 
 namespace TrabajoTarjeta;
 
-class Boleto implements BoletoInterface {
+class Boleto implements Boleto_Interface {
 
     protected $valor;
 
