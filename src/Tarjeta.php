@@ -83,7 +83,7 @@ class Tarjeta implements TarjetaInterface {
                     }
                     else{
                         if($this->haytrans($colectivo)){
-                            $this->valor = ($this->valor /33)*100;
+                            $this->valor = ($this->valor /33)*10;
                             $this->costo = $this->costoPlus + $this->valor;
                             $this->saldo = $this->saldo - $this->costo;
                             $this->caso = "Trasbordo";
@@ -110,7 +110,7 @@ class Tarjeta implements TarjetaInterface {
                     }
                     else{
                         if($this->haytrans($colectivo)){
-                            $this->valor = ($this->valor /33)*100;
+                            $this->valor = ($this->valor /33)*10;
                             $this->costo = $this->costoPlus + $this->valor;
                             $this->saldo = $this->saldo - $this->costo;
                             $this->caso = "Trasbordo";
@@ -130,7 +130,7 @@ class Tarjeta implements TarjetaInterface {
                     }
                 case 2:
                     if($this->haytrans($colectivo)){ 
-                        $this->valor = ($this->valor /33)*100;
+                        $this->valor = ($this->valor /33)*10;
                         $this->costo = $this->costoPlus + $this->valor;
                         $this->saldo = $this->saldo - $this->costo;
                         $this->caso = "Trasbordo";

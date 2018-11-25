@@ -44,7 +44,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                     }
                     else{
                         if($this->haytrans($colectivo)){
-                            $this->valor = ($this->valor /33)*100;
+                            $this->valor = ($this->valor /33)*10;
                             $this->costo = $this->costoPlus + $this->valor;
                             $this->saldo = $this->saldo - $this->costo;
                             $this->caso = "Trasbordo";
@@ -77,7 +77,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                     }
                     else{
                         if($this->haytrans($colectivo)){
-                            $this->valor = ($this->valor /33)*100;
+                            $this->valor = ($this->valor /33)*10;
                             $this->costo = $this->costoPlus + $this->valor;
                             $this->saldo = $this->saldo - $this->costo;
                             $this->caso = "Trasbordo";
@@ -103,7 +103,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                     }
                 case 2:
                     if($this->haytrans($colectivo)){ 
-                        $this->valor = ($this->valor /33)*100;
+                        $this->valor = ($this->valor /33)*10;
                         $this->costo = $this->costoPlus + $this->valor;
                         $this->saldo = $this->saldo - $this->costo;
                         $this->caso = "Trasbordo";
