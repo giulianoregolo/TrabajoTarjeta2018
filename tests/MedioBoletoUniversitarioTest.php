@@ -38,4 +38,46 @@ class MedioBoletoUniversitarioTest extends TestCase {
         $medioboleto->pagarTarjeta($colectivo);
         $this->assertEquals($medioboleto->pagarTarjeta($colectivo),false);
     }
+    public function testMedioboletotrasbordoNormal(){
+        $tiempo = new TiempoFalso();
+        $tiempo->avanzar(36000);
+        $medioboleto = new TarjetaMedioBoletoUniversitario($tiempo, null);
+        $colectivo = new Colectivo("mixta","133",420);
+        $colectivo2 = new Colectivo("mixta","102",421);
+        $medioboleto->recargar(50.0);
+        $medioboleto->pagarTarjeta($colectivo);
+        $this->assertEquals($medioboleto->obtenerCosto(), 7.40);
+        $tiempo->avanzar(300);
+        $medioboleto->pagarTarjeta($colectivo2);
+        $this->assertEquals($medioboleto->obtenerCosto(), 2.442);
+    }
+    public function testMedioboletotrasbordoCUVP(){
+        $tiempo = new TiempoFalso();
+        $tiempo->avanzar(36000);
+        $medioboleto = new TarjetaMedioBoletoUniversitario($tiempo, null);
+        $colectivo = new Colectivo("mixta","133",420);
+        $colectivo2 = new Colectivo("mixta","102",421);
+        $medioboleto->recargar(50.0);
+        $medioboleto->pagarTarjeta($colectivo);
+        $this->assertEquals($medioboleto->obtenerCosto(), 7.40);
+        $medioboleto->gastarPlus();
+        $tiempo->avanzar(300);
+        $medioboleto->pagarTarjeta($colectivo2);
+        $this->assertEquals($medioboleto->obtenerCosto(), 17.242);
+    }
+    public function testMedioboletotrasbordoplus(){
+        $tiempo = new TiempoFalso();
+        $tiempo->avanzar(36000);
+        $medioboleto = new TarjetaMedioBoletoUniversitario($tiempo, null);
+        $colectivo = new Colectivo("mixta","133",420);
+        $colectivo2 = new Colectivo("mixta","102",421);
+        $medioboleto->recargar(50.0);
+        $medioboleto->pagarTarjeta($colectivo);
+        $this->assertEquals($medioboleto->obtenerCosto(), 7.40);
+        $medioboleto->gastarPlus();
+        $medioboleto->gastarPlus();
+        $tiempo->avanzar(300);
+        $medioboleto->pagarTarjeta($colectivo2);
+        $this->assertEquals($medioboleto->obtenerCosto(), 32.042);
+    }
 }
