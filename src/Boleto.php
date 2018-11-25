@@ -30,7 +30,7 @@ class Boleto implements Boleto_Interface {
         $this->tipoTarjeta = $tarjeta->obtener_tipo();
         $this->linea = $colectivo->linea();
         $this->saldo = $tarjeta->obtenerSaldo();
-        $this->cantidad_viajes_plus = $tarjeta->obetener_cantidad_viajes_plus();
+        $this->cantidad_viajes_plus = $tarjeta->obtener_cantidad_viajes_plus();
         $this->costoTotal = $tarjeta->obtener_costo();
         $this->tipoBoleto = $tarjeta->caso;
         $this->costoplus = $tarjeta->obtener_costo_plus();
@@ -72,7 +72,7 @@ class Boleto implements Boleto_Interface {
         return $this->costoplus;
     }
 
-    public function obtener_canntidad_viajes_plus() {
+    public function obtener_cantidad_viajes_plus() {
         return $this->cantidad_viajes_plus;
     }
 
