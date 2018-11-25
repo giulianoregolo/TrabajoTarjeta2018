@@ -34,6 +34,6 @@ interface Colectivo_Interface {
      *  El boleto generado por el pago del viaje. O FALSE si no hay saldo
      *  suficiente en la tarjeta.
      */
-    public function pagar_con( TarjetaInterface $tarjeta );
+    public function pagar_con( Tarjeta_Interface $tarjeta );
 
 }
