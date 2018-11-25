@@ -71,14 +71,14 @@ class Tarjeta implements Tarjeta_Interface {
                 case 1:
                     $this->gastar_plus();
                     $this->costo = 0.0;
-                    $this->caso = 'viajeplus';
+                    $this->caso = 'Viaje Plus';
                     $this->guardo_cole( $colectivo );
                     $this->trasbordo = true;
                     return true;
                 case 2:
                     $this->gastar_plus();
                     $this->costo = 0.0;
-                    $this->caso = 'viajeplus';
+                    $this->caso = 'Viaje Plus';
                     $this->guardo_cole( $colectivo );
                     $this->trasbordo = true;
                     return true;
@@ -130,7 +130,7 @@ class Tarjeta implements Tarjeta_Interface {
                             return true;
                         } else {
                             $this->saldo = $this->saldo - $this->costo;
-                            $this->caso = 'pagandoPlus';
+                            $this->caso = 'Pagando Plus';
                             $this->ultimo_pago = $this->tiempo->time();
                             $this->guardo_cole( $colectivo );
                             $this->trasbordo = true;

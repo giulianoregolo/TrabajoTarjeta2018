@@ -27,7 +27,7 @@ class Datos_Boleto_Test extends TestCase {
         $this->assertEquals( $boleto->obtener_saldo(), 0.0 );
         $this->assertEquals($boleto->obtener_tarjeta_id(), $tarjeta->obtener_id() );
         $this->assertEquals($boleto->obtener_linea(), '103' );
-        $this->assertEquals($boleto->obtener_tipo_boleto(), 'viajeplus' );
+        $this->assertEquals($boleto->obtener_tipo_boleto(), 'Viaje Plus' );
     }
     public function test_boleto_pagando_plus() {
         $tiempo_prueba = new Tiempo();
