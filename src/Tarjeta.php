@@ -2,8 +2,6 @@
 
 namespace TrabajoTarjeta;
 
-include_once ( 'TarjetaInterface.php' );
-
 class Tarjeta implements Tarjeta_Interface {
 
     protected $saldo = 0;

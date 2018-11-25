@@ -2,8 +2,6 @@
 
 namespace TrabajoTarjeta;
 
-include_once ( 'BoletoInterface.php' );
-
 class Boleto implements Boleto_Interface {
 
     protected $valor;
