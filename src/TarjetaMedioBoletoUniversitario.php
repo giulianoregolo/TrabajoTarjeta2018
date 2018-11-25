@@ -13,31 +13,36 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
     }
 
     public function pagarTarjeta($colectivo){
-        $valoraux = $this->obtenerValorBoleto();
-        if($this->saldo < $valoraux){
+        $this->costo = $this->obtenerValorBoleto();
+        if($this->saldo < $this->costo){
             switch($this->viajesplus){
                 case 0:
                     return false;
-                    break;
                 case 1:
                     $this->gastarplus();
+                    $this->costo = 0.0;
+                    $this->caso = "viajeplus";
+                    $this->guardoCole($colectivo);
+                    $this->trasbordo = true;
                     return true;
-                    break;
                 case 2:
                     $this->gastarplus();
+                    $this->costo = 0.0;
+                    $this->caso = "viajeplus";
+                    $this->guardoCole($colectivo);
+                    $this->trasbordo = true;
                     return true;
-                    break;
             }
         }
         else{
             switch($this->viajesplus){
                 case 0:
-                    $valoraux= $valoraux+14.80+14.80;
-                    if($this->saldo < $valoraux){
+                    $this->costo = $this->costo + $this->valor*2;
+                    if($this->saldo < $this->costo){
                         return false;
                     }
                     else{
-                        $this->saldo = $this->saldo - $valoraux;
+                        $this->saldo = $this->saldo - $this->costo;
                             if ($this->cantidadpagos < 2){
                             $this->cantidadpagos = $this->cantidadpagos + 1;
                         }
@@ -46,12 +51,12 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                     }
 
                 case 1:
-                    $valoraux= $valoraux+14.80;
-                    if($this->saldo < $this->valoraux){
+                    $this->costo= $this->costo+$this->valor;
+                    if($this->saldo < $this->this->costo){
                         return false;
                     }
                     else{
-                        $this->saldo = $this->saldo - $this->valoraux;
+                        $this->saldo = $this->saldo - $this->this->costo;
                         if ($this->cantidadpagos < 2){
                             $this->cantidadpagos = $this->cantidadpagos + 1;
                         }
@@ -60,7 +65,7 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                     }
                 
                 case 2:
-                    $this->saldo = $this->saldo - $valoraux;
+                    $this->saldo = $this->saldo - $this->costo;
                     if ($this->cantidadpagos < 2){
                         $this->cantidadpagos = $this->cantidadpagos + 1;
                     }

@@ -12,49 +12,104 @@ class TarjetamedioBoleto extends Tarjeta {
         if ($this->tiempoDeEsperaCumplido() && $this->ultimopago != null){
 		$this->valor = $this->valor/2; 	
         }
+        else{
+            $this->valor = 14.80;
+        }
         if($this->saldo < $this->valor){
             switch($this->viajesplus){
                 case 0:
                     return false;
-                    break;
                 case 1:
                     $this->gastarplus();
+                    $this->costo = 0.0;
+                    $this->caso = "viajeplus";
+                    $this->guardoCole($colectivo);
+                    $this->trasbordo = true;
                     return true;
-                    break;
                 case 2:
                     $this->gastarplus();
+                    $this->costo = 0.0;
+                    $this->caso = "viajeplus";
+                    $this->guardoCole($colectivo);
+                    $this->trasbordo = true;
                     return true;
-                    break;
             }
         }
         else{
             switch($this->viajesplus){
                 case 0:
-                    $this->valor= $this->valor+14.80+14.80;
-                    if($this->saldo < $this->valor){
+                    $this->costoPlus = $this->valor*2;
+                    $this->costo = $this->costoPlus + $this->valor;
+                    if($this->saldo < $this->costo){
                         return false;
                     }
                     else{
-                        $this->saldo = $this->saldo - $this->valor;                        
-                        $this->ultimopago = $this->tiempo->time();
-                        return true;
+                        if($this->haytrans($colectivo)){
+                            $this->valor = ($this->valor /33)*100;
+                            $this->costo = $this->costoPlus + $this->valor;
+                            $this->saldo = $this->saldo - $this->costo;
+                            $this->caso = "Trasbordo";
+                            $this->ultimopago = $this->tiempo->time();
+                            $this->guardoCole($colectivo);
+                            $this->trasbordo = false;
+                            return true;
+                        }
+                        else{
+                            $this->saldo = $this->saldo - $this->costo;
+                            $this->caso = "pagandoPlus";
+                            $this->ultimopago = $this->tiempo->time();
+                            $this->trasbordo = true;
+                            $this->guardoCole($colectivo);
+                            return true;
+                        }
                     }
 
                 case 1:
-                    $this->valor= $this->valor+14.80;
-                    if($this->saldo < $this->valor){
+                    $this->costoPlus = $this->valor;
+                    $this->costo = $this->costoPlus + $this->valor;
+                    if($this->saldo < $this->costo){
                         return false;
                     }
                     else{
-                        $this->saldo = $this->saldo - $this->valor;
+                        if($this->haytrans($colectivo)){
+                            $this->valor = ($this->valor /33)*100;
+                            $this->costo = $this->costoPlus + $this->valor;
+                            $this->saldo = $this->saldo - $this->costo;
+                            $this->caso = "Trasbordo";
+                            $this->ultimopago = $this->tiempo->time();
+                            $this->guardoCole($colectivo);
+                            $this->trasbordo = false;
+                            return true;
+                        }
+                        else{
+                            $this->saldo = $this->saldo - $this->costo;
+                            $this->caso = "pagandoPlus";
+                            $this->ultimopago = $this->tiempo->time();
+                            $this->guardoCole($colectivo);
+                            $this->trasbordo = true;
+                            return true;
+                        }
+                    }
+                case 2:
+                    if($this->haytrans($colectivo)){ 
+                        $this->valor = ($this->valor /33)*100;
+                        $this->costo = $this->costoPlus + $this->valor;
+                        $this->saldo = $this->saldo - $this->costo;
+                        $this->caso = "Trasbordo";
                         $this->ultimopago = $this->tiempo->time();
+                        $this->guardoCole($colectivo);
+                        $this->trasbordo = flase;
                         return true;
                     }
-                
-                case 2:
-                    $this->saldo = $this->saldo - $this->valor;                    
-                    $this->ultimopago = $this->tiempo->time();
-                    return true;
+                    else{
+                        $this->costo = $this->costoPlus + $this->valor;
+                        $this->saldo = $this->saldo - $this->costo;
+                        $this->caso = "Medio";
+                        $this->ultimopago = $this->tiempo->time();
+                        $this->guardoCole($colectivo);
+                        $this->trasbordo = true;
+                        return true;
+                    }    
             }
         }
     
