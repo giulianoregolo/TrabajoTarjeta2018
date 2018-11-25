@@ -2,6 +2,8 @@
 
 namespace TrabajoTarjeta;
 
+include ( TiempoInterface.php );
+
 class Tiempo implements Tiempo_Interface {
 
     protected $feriados = array(
