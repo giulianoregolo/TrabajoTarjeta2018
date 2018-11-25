@@ -2,7 +2,7 @@
 
 namespace TrabajoTarjeta;
 
-class Tiempo implements Tiempo_Interface {
+class Tiempo implements Tiempointerface {
 
     protected $feriados = array(
         '19-11-18',
