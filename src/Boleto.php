@@ -6,8 +6,6 @@ class Boleto implements BoletoInterface {
 
     protected $valor;
 
-  //  protected $hora;
-
     protected $id;
 
     protected $tipoTarjeta;
@@ -25,7 +23,7 @@ class Boleto implements BoletoInterface {
     protected $costoplus;
 
 
-    public function __construct($colectivo,$tarjeta) {
+    public function __construct( $colectivo, $tarjeta ) {
         $this->valor = $tarjeta->obtenervalor();
         $this->hora = $tarjeta->obtenerhora();
         $this->id = $tarjeta->obtenerId();
@@ -38,38 +36,38 @@ class Boleto implements BoletoInterface {
         $this->costoplus = $tarjeta->obtenerCostoPlus();
     }
 
-    public function obtenerValor() {
+    public function obtener_valor() {
         return $this->valor;
     }
 
-    public function obtenerlinea() {
+    public function obtener_linea() {
         return $this->linea;
     }
 
-    public function obtenerTarjetaId(){
+    public function obtener_tarjeta_id() {
         return $this->id;
     }
 
-    public function obtenersaldo(){
+    public function obtener_saldo() {
         return $this->saldo;
     }
 
-    public function obtenertipoTarjeta(){
+    public function obtener_tipo_tarjeta() {
         return $this->tipoTarjeta;       
     }
 
-    public function obtenerhora(){
+    public function obtener_hora() {
         return $this->hora;
     }
 
-    public function obtenerCostoTotal(){
+    public function obtener_costo_total() {
         return $this->costoTotal;
     }
 
-    public function obtenerTipoBoleto(){
+    public function obtener_tipo_boleto() {
         return $this->tipoBoleto;
     } 
-    public function obtenerCostoPlus(){
+    public function obtener_costo_plus() {
         return $this->costoplus;
     }
 
