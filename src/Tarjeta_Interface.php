@@ -22,7 +22,7 @@ interface Tarjeta_Interface {
      */
     public function obtener_saldo();
     
-    public function obetener_plus();
+    public function obtener_plus();
     
     public function pagar_tarjeta( $colectivo );
     
