@@ -8,6 +8,8 @@ class TarjetaTest extends TestCase {
 
     /**
      * Comprueba que la tarjeta aumenta su saldo cuando se carga saldo válido.
+     * 
+     * @return void
      */
     public function test_carga_saldo() {
         $tiempo_prueba = new Tiempo();
@@ -37,6 +39,8 @@ class TarjetaTest extends TestCase {
 
     /**
      * Comprueba que la tarjeta no puede cargar saldos invalidos.
+     * 
+     * @return void
      */
     public function test_carga_saldo_invalido() {
         $tiempo_prueba = new Tiempo();

@@ -7,7 +7,9 @@ use PHPUnit\Framework\TestCase;
 class medio_boletoUniversitarioTest extends TestCase {
 
     /**
-     * Comprueba que el medio boleto page la mitad que una tarjeta normal en un pago estandar.
+     * Comprueba que el medio boleto universitario puede usar trasbordo y solo es valido hasta dos veces por dia.
+     * 
+     * @return void
      */
     public function test_medio_boleto_universitario_tiempo() {
         $tiempo = new Tiempo_Falso();
@@ -25,6 +27,12 @@ class medio_boletoUniversitarioTest extends TestCase {
         $medio_boleto->pagar_tarjeta( $colectivo );
         $this->assertEquals( $medio_boleto->obtener_costo(), 14.80 );
     }
+
+    /**
+     * Comprueba que el medio boleto universitario pueda usar hasta dos viajes plus
+     * 
+     * @return void
+     */
     public function test_medio_boleto_un_viajeplus(){
         $tiempo = new Tiempo_Falso();
         $tiempo->avanzar( 36000 );
@@ -38,6 +46,13 @@ class medio_boletoUniversitarioTest extends TestCase {
         $medio_boleto->pagar_tarjeta( $colectivo );
         $this->assertEquals( $medio_boleto->pagar_tarjeta( $colectivo ), false );
     }
+
+    /**
+     * Comprueba que el medio boleto universitario puede usar trasbordo
+     * 
+     * @return void
+     */
+
     public function test_medio_boleto_trasbordo_normal(){
         $tiempo = new Tiempo_Falso();
         $tiempo->avanzar( 36000 );
@@ -51,6 +66,12 @@ class medio_boletoUniversitarioTest extends TestCase {
         $medio_boleto->pagar_tarjeta( $colectivo2 );
         $this->assertEquals( $medio_boleto->obtener_costo(), 2.442 );
     }
+
+    /**
+     * Comprueba que el medio boleto universitario puede usar trasbordo con un viaje plus pero este no se ve afectado
+     * 
+     * @return void
+     */
     public function test_medio_boleto_trasbordo_CUVP(){
         $tiempo = new Tiempo_Falso();
         $tiempo->avanzar( 36000 );
@@ -65,6 +86,12 @@ class medio_boletoUniversitarioTest extends TestCase {
         $medio_boleto->pagar_tarjeta( $colectivo2 );
         $this->assertEquals( $medio_boleto->obtener_costo(), 17.242 );
     }
+
+    /**
+     * Comprueba que el medio boleto universitario puede usar trasbordo con dos viajes plus pero estos no se ven afectados
+     * 
+     * @return void
+     */
     public function test_medio_boleto_trasbordo_plus(){
         $tiempo = new Tiempo_Falso();
         $tiempo->avanzar( 36000 );

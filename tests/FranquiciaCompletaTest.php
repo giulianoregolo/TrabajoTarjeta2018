@@ -7,7 +7,9 @@ use PHPUnit\Framework\TestCase;
 class Franquicia_Completa_Test extends TestCase {
 
     /**
-     * Comprueba que la Francuicia completa siempre pueda pagar.
+     * Comprueba que la franquicia completa siempre pueda pagar.
+     * 
+     * @return void
      */
     public function test_pagar_monto_estandar() {
         $tiempo = new Tiempo();

@@ -6,6 +6,12 @@ use PHPUnit\Framework\TestCase;
 
 class Datos_Boleto_Test extends TestCase {
 
+    /**
+     * Comprueba que los datos de un boleto se asignan correctamente al pagar con una tarjeta en un colectivo
+     * 
+     * @return void
+     */
+
     public function test_boleto_normal() {
         $tiempo_prueba = new Tiempo();
         $tarjeta = new Tarjeta($tiempo_prueba, NULL);
@@ -18,6 +24,12 @@ class Datos_Boleto_Test extends TestCase {
         $this->assertEquals( $boleto->obtener_linea(), '103' );
         $this->assertEquals( $boleto->obtener_tipo_boleto(), 'Normal' );
     }
+
+    /**
+     * Comprueba que los datos de un boleto se asignan correctamente al usar un viaje plus  con una tarjeta en un colectivo
+     * 
+     * @return void
+     */
     public function test_boleto_plus() {
         $tiempo_prueba = new Tiempo();
         $tarjeta = new Tarjeta( $tiempo_prueba, NULL );
@@ -29,6 +41,12 @@ class Datos_Boleto_Test extends TestCase {
         $this->assertEquals($boleto->obtener_linea(), '103' );
         $this->assertEquals($boleto->obtener_tipo_boleto(), 'Viaje Plus' );
     }
+
+    /**
+     * Comprueba que los datos de un boleto se asignan correctamente al pagar con una tarjeta en un colectivo cuando se debe un viaje plus
+     * 
+     * @return void
+     */
     public function test_boleto_pagando_plus() {
         $tiempo_prueba = new Tiempo();
         $tarjeta = new Tarjeta( $tiempo_prueba, NULL );

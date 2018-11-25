@@ -8,6 +8,8 @@ class PagarTest2 extends TestCase {
 
     /**
      * Comprueba que la tarjeta pueda pagar con saldo.
+     * 
+     * @return void
      */
     public function test_pagar_monto_consaldo() {
         $tiempo_prueba = new Tiempo();
@@ -19,6 +21,8 @@ class PagarTest2 extends TestCase {
 
     /**
      * Comprueba que la tarjeta puede pagar sin saldo hasta dos veces.
+     * 
+     * @return void
      */
     public function test_pagar_monto_sin_saldo() {
         $tiempo_prueba = new Tiempo();

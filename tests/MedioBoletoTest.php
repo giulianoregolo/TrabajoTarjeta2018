@@ -8,6 +8,8 @@ class medio_boletoTest extends TestCase {
 
     /**
      * Comprueba que el medio boleto page la mitad que una tarjeta normal en un pago estandar.
+     * 
+     * @return void
      */
     public function test_pagar_monto_estandar() {
         $tiempo = new Tiempo_Falso();
@@ -21,6 +23,8 @@ class medio_boletoTest extends TestCase {
     
     /**
      * Comprueba que el medio boleto page la mitad que una tarjeta normal en un pago con un viaje plus acumulado
+     * 
+     * @return void
      */
     public function test_pagar_monto_viaje_plus_simple() {
         $tiempo = new Tiempo_Falso();
@@ -36,6 +40,8 @@ class medio_boletoTest extends TestCase {
     
     /**
      * Comprueba que el medio boleto page la mitad que una tarjeta normal en un pago con dos viajes plus acumulados
+     * 
+     * @return void
      */
     public function test_pagar_monto_viaje_plus_doble() {
         $tiempo = new Tiempo_Falso();
@@ -49,8 +55,14 @@ class medio_boletoTest extends TestCase {
         $medio_boleto->pagar_tarjeta( $colectivo );
         $this->assertEquals( $medio_boleto->obtener_costo(), ( 37.0 ) );
     }
+
+    /**
+     * Comprueba que no se deja marcar un segundo medio boleto en un intervalo menor a 5 minutos
+     * 
+     * @return void
+     */
     
-    public function testmedio_boleto_tiempo() {
+    public function test_medio_boleto_tiempo() {
         $tiempo = new Tiempo_Falso();
         $tiempo->avanzar( 36000 );
         $medio_boleto = new Tarjeta_Medio_Boleto( $tiempo, null );
@@ -63,6 +75,11 @@ class medio_boletoTest extends TestCase {
         $this->assertEquals( $medio_boleto->obtener_costo(), 14.80 );
     }
     
+    /**
+     * Comprueba que se pueden utilizar viajes plus con un medio boleto
+     * 
+     * @return void
+     */
     public function test_medio_boleto_viaje_plus(){
         $tiempo = new Tiempo_Falso();
         $tiempo->avanzar(36000);
@@ -77,6 +94,11 @@ class medio_boletoTest extends TestCase {
         $this->assertEquals( $medio_boleto->pagar_tarjeta( $colectivo ), false );
     }
 
+    /**
+     * Comprueba que es posible utilizar trasbordo con un medio boleto
+     * 
+     * @return void
+     */
     public function test_medio_boleto_trasbordo_normal(){
         $tiempo = new Tiempo_Falso();
         $tiempo->avanzar(36000);
@@ -90,6 +112,12 @@ class medio_boletoTest extends TestCase {
         $medio_boleto->pagar_tarjeta( $colectivo2 );
         $this->assertEquals( $medio_boleto->obtener_costo(), 2.442 );
     }
+
+    /**
+     * Comprueba que se puede usar trasbordo con un viaje plus en un medio boleto pero el viaje plus no se ve afectado
+     * 
+     * @return void
+     */
     public function test_medio_boleto_trasbordo_CUVP(){
         $tiempo = new Tiempo_Falso();
         $tiempo->avanzar( 36000 );
@@ -104,6 +132,12 @@ class medio_boletoTest extends TestCase {
         $medio_boleto->pagar_tarjeta( $colectivo2 );
         $this->assertEquals( $medio_boleto->obtener_costo(), 17.242 );
     }
+
+    /**
+     * Comprueba que se puede usar trasbordo con dos viajes plus en un medio boleto pero los viajes plus no se ven afectados
+     * 
+     * @return void
+     */
     public function test_medio_boleto_trasbordo_plus(){
         $tiempo = new Tiempo_Falso();
         $tiempo->avanzar( 36000 );
