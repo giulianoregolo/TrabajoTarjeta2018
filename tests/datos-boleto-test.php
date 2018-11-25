@@ -4,15 +4,15 @@ namespace TrabajoTarjeta;
 
 use PHPUnit\Framework\TestCase;
 
-class DatosBoletoTest extends TestCase {
+class Datos_Boleto_Test extends TestCase {
 
-    public function testBoletoNormal() {
-        $tiempoprueba = new Tiempo();
-        $tarjeta = new Tarjeta($tiempoprueba, NULL);
-        $colectivo = new Colectivo("mixta","103",420);
-        $tarjeta->recargar(20.0);
-        $boleto = $colectivo->pagarCon($tarjeta);
-        $this->assertEquals($boleto->obtenerValor(),14.80);
+    public function test_boleto_normal() {
+        $tiempo_prueba = new Tiempo();
+        $tarjeta = new Tarjeta($tiempo_prueba, NULL);
+        $colectivo = new Colectivo( 'mixta', '103', 420 );
+        $tarjeta->recargar( 20.0 );
+        $boleto = $colectivo->pagar_con( $tarjeta );
+        $this->assertEquals( $boleto->obtenerValor(), 14.80 );
         $this->assertEquals($boleto->obtenersaldo(),5.20);
         $this->assertEquals($boleto->obtenerTarjetaId(),$tarjeta->obtenerId());
         $this->assertEquals($boleto->obtenerlinea(),"103");
