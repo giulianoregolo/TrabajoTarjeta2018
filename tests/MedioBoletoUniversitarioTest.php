@@ -25,4 +25,17 @@ class MedioBoletoUniversitarioTest extends TestCase {
         $medioboleto->pagarTarjeta($colectivo);
         $this->assertEquals($medioboleto->obtenerCosto(), 7.40);
     }
+    public function testMedioboletoUniViajeplus(){
+        $tiempo = new TiempoFalso();
+        $tiempo->avanzar(36000);
+        $medioboleto = new TarjetaMedioBoletoUniversitario($tiempo, null);
+        $colectivo = new Colectivo("mixta","133",420);
+        $this->assertEquals($medioboleto->obetenerPlus(),2);
+        $medioboleto->pagarTarjeta($colectivo);
+        $this->assertEquals($medioboleto->obetenerPlus(),1);
+        $medioboleto->gastarPlus();
+        $this->assertEquals($medioboleto->obetenerPlus(),0);
+        $medioboleto->pagarTarjeta($colectivo);
+        $this->assertEquals($medioboleto->pagarTarjeta(),false);
+    }
 }

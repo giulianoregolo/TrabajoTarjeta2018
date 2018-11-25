@@ -120,6 +120,9 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                         $this->ultimopago = $this->tiempo->time();
                         $this->guardoCole($colectivo);
                         $this->trasbordo = false;
+                        if ($this->cantidadpagos < 2){
+                            $this->cantidadpagos = $this->cantidadpagos + 1;
+                            }
                         return true;
                     }
                     else{
@@ -129,6 +132,9 @@ class TarjetaMedioBoletoUniversitario extends Tarjeta {
                         $this->ultimopago = $this->tiempo->time();
                         $this->guardoCole($colectivo);
                         $this->trasbordo = true;
+                        if ($this->cantidadpagos < 2){
+                            $this->cantidadpagos = $this->cantidadpagos + 1;
+                            }
                         return true;
                     }    
             }   
