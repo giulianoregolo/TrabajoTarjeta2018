@@ -2,7 +2,8 @@
 
 namespace TrabajoTarjeta;
 
-class Tiempo implements TiempoInterface {
+class Tiempo implements Tiempo_Interface {
+
     protected $feriados = array(
         '19-11-18',
         '08-12-18',
@@ -28,17 +29,20 @@ class Tiempo implements TiempoInterface {
         '18-11-19',
         '08-12-19',
     );
-    public function time(){
+
+    public function time() {
         return time();
     }
-    public function esFeriado(){
-        $fecha = date('d-m-y', $this->time());
-        return in_array($fecha, $this->feriados);
+    public function es_feriado(){
+        $fecha = date( 'd-m-y', $this->time() );
+        return in_array( $fecha, $this->feriados );
     }
 }
 
-class TiempoFalso implements TiempoInterface {
+class Tiempo_Falso implements Tiempo_Interface {
+
     protected $tiempo;
+
     protected $feriados = array(
         '01-01', //  Año Nuevo
         '24-03', //  Día Nacional de la Memoria por la Verdad y la Justicia.
@@ -54,18 +58,19 @@ class TiempoFalso implements TiempoInterface {
         '08-12', //  Inmaculada Concepción de María
         '25-12', //  Navidad
     );
-    public function __construct($inicio = 0) {
+
+    public function __construct( $inicio = 0 ) {
         $this->tiempo = $inicio;
     }
     
-    public function avanzar($segundos){
+    public function avanzar( $segundos ) {
         $this->tiempo += $segundos;
     }
-    public function time(){
+    public function time() {
         return $this->tiempo;
     }
-    public function esFeriado(){
-        $fecha = date('d-m', $this->tiempo);
-        return in_array($fecha, $this->feriados);
+    public function esFeriado() {
+        $fecha = date( 'd-m', $this->tiempo );
+        return in_array( $fecha, $this->feriados );
     }
 }
