@@ -30,7 +30,7 @@ class Boleto implements Boleto_Interface {
         $this->tipoTarjeta = $tarjeta->obtener_tipo();
         $this->linea = $colectivo->linea();
         $this->saldo = $tarjeta->obtener_saldo();
-        $this->cantidad_viajes_plus = $tarjeta->obtener_cantidad_viajes_plus();
+        $this->cantidad_viajes_plus = $tarjeta->obtener_plus();
         $this->costoTotal = $tarjeta->obtener_costo();
         $this->tipoBoleto = $tarjeta->caso;
         $this->costoplus = $tarjeta->obtener_costo_plus();

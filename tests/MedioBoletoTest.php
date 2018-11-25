@@ -29,7 +29,7 @@ class medio_boletoTest extends TestCase {
         $colectivo = new Colectivo( 'mixta', '133', 420 );
         $medio_boleto->recargar( 50.0 );
         $medio_boleto->gastar_plus();
-        $this->assertEquals( $medio_boleto->obetener_plus(), 1 );
+        $this->assertEquals( $medio_boleto->obtener_plus(), 1 );
         $medio_boleto->pagar_tarjeta( $colectivo );
         $this->assertEquals( $medio_boleto->obtener_costo(), ( 22.2 ) );
     }

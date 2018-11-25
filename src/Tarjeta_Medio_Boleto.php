@@ -20,7 +20,7 @@ class Tarjeta_Medio_Boleto extends Tarjeta {
             $this->valor = 14.80;
         }
         if ( $this->saldo < $this->valor ) {
-            switch ( $this->viajesplus ) {
+            switch ( $this->viajes_plus ) {
                 case 0:
                     return false;
                 case 1:

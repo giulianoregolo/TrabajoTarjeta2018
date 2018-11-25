@@ -196,7 +196,7 @@ class Tarjeta implements Tarjeta_Interface {
     }
 
 	public function es_trasbordo( $colectivo ) {	
-		return ( ( $this->linea_anterior != $colectivo->linea() ) || ( $this->numeroAnterior != $colectivo->numero() ) );
+		return ( ( $this->linea_anterior != $colectivo->linea() ) || ( $this->numero_anterior != $colectivo->numero() ) );
     }
 
     public function tiempo_valido() { 
