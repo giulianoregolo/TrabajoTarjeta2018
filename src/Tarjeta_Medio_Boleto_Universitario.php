@@ -14,6 +14,11 @@ class Tarjeta_Medio_Boleto_Universitario extends Tarjeta {
 
     protected $tiempo_de_espera = 300;
     
+    /**
+     * Devuelve el valor que se imprimirá en el boleto
+     * 
+     * @return float
+     */
     public function obtener_valor_boleto() {
         if ( $this->medio_disponible() ) {
             return ( $this->valor ) / 2;
@@ -22,6 +27,15 @@ class Tarjeta_Medio_Boleto_Universitario extends Tarjeta {
         }
     }
 
+    /**
+     * Usa la tarjeta para pagar un viaje en un colectivo determinado
+     * 
+     * @param Colectivo_Interface $colectivo
+     *      El colectivo en el cual se usa la tarjeta
+     * 
+     * @return bool
+     *      Devuelve true si se pudo pagar el viaje y false en caso contrario
+     */
     public function pagar_tarjeta( $colectivo ) {
         $valor_aux = $this->obtener_valor_boleto();
         if ( $this->saldo < $valor_aux ) {
@@ -139,6 +153,12 @@ class Tarjeta_Medio_Boleto_Universitario extends Tarjeta {
         }
     }
     
+    /**
+     * Indica si se alcanzó o no el tiempo de espera necesario para usar el medio boleto
+     * 
+     * @return bool
+     *      Devuelve true si se alcanzó el tiempo y false en caso contrario
+     */
     public function tiempo_de_espera_cumplido() {
         $ultimo_pago = $this->ultimo_pago;
         $fecha_actual = $this->tiempo->time();
@@ -149,6 +169,13 @@ class Tarjeta_Medio_Boleto_Universitario extends Tarjeta {
         return FALSE;
     }
 
+
+    /**
+     * Indica si el medio boleto está habilitado para ser usado o no
+     * 
+     * @return bool
+     *      Devuelve true si se puede usar el medio boleto y false en caso contrario
+     */
     public function medio_disponible() {
         if($this->cantidad_pagos < 2 ) {
             if( $this->tiempo_de_espera_cumplido() ) {
@@ -162,6 +189,12 @@ class Tarjeta_Medio_Boleto_Universitario extends Tarjeta {
         return FALSE;
     }
 
+    /**
+     * Indica si pasó la tarjeta fue usada por última vez el día actual o no
+     * 
+     * @return bool
+     *      Devuelve true si la tarjeta fue usada un día anterior al actual y false en caso contrario
+     */
     public function tiempo_de_espera_ultimo_medio_cumplido() {
         $fecha_ultima = $this->obtener_ultima_fecha_pagada();
         $fecha_ultima = date( "d/m/y", $fecha_ultima );
@@ -172,9 +205,21 @@ class Tarjeta_Medio_Boleto_Universitario extends Tarjeta {
         }
         return FALSE;
     }
+
+    /**
+     * Devuelve el tiempo que se debe esperar después de usar el medio boleto para poder volver a usarlo en segundos
+     * 
+     * @return int
+     */
     public function obtener_tiempo_de_espera() {
         return $this->tiempo_de_espera;
     }
+
+    /**
+     * Devuelve el tiempo que pasó desde la última vez que fue usada la tarjeta
+     * 
+     * @return int
+     */
     public function obtener_ultima_fecha_pagada() {
         return $this->ultimo_pago;
     }

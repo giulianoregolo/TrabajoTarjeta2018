@@ -30,9 +30,21 @@ class Tiempo implements Tiempo_Interface {
         '08-12-19',
     );
 
+    /**
+     * Devuelve el tiempo actual
+     * 
+     * @return int
+     */
     public function time() {
         return time();
     }
+
+    /**
+     * Indica si el dia actual es un feriado
+     * 
+     * @return bool
+     *      Devuelve true si es un feriado y false en caso contrario
+     */
     public function es_feriado(){
         $fecha = date( 'd-m-y', $this->time() );
         return in_array( $fecha, $this->feriados );
@@ -63,12 +75,30 @@ class Tiempo_Falso implements Tiempo_Interface {
         $this->tiempo = $inicio;
     }
     
+    /**
+     * Avanza el tiempo un segundo
+     * 
+     * @return void
+     */
     public function avanzar( $segundos ) {
         $this->tiempo += $segundos;
     }
+
+    /**
+     * Devuelve el tiempo actual
+     * 
+     * @return int
+     */
     public function time() {
         return $this->tiempo;
     }
+
+    /**
+     * Indica si el dia actual es un feriado
+     * 
+     * @return bool
+     *      Devuelve true si es un feriado y false en caso contrario
+     */
     public function es_feriado() {
         $fecha = date( 'd-m', $this->tiempo );
         return in_array( $fecha, $this->feriados );
