@@ -2,75 +2,136 @@
 
 namespace TrabajoTarjeta;
 
-class Boleto implements BoletoInterface {
+class Boleto implements Boleto_Interface {
 
     protected $valor;
 
-  //  protected $hora;
-
     protected $id;
 
-    protected $tipoTarjeta;
+    protected $tipo_tarjeta;
 
-    protected $costoTotal;
+    protected $costo_total;
 
     protected $linea;
 
     protected $saldo;
 
-    protected $canViajesplus;
+    protected $cantidad_viajes_plus;
 
-    protected $tipoBoleto;
+    protected $tipo_boleto;
 
-    protected $costoplus;
+    protected $costo_plus;
 
-
-    public function __construct($colectivo,$tarjeta) {
-        $this->valor = $tarjeta->obtenervalor();
-        $this->hora = $tarjeta->obtenerhora();
-        $this->id = $tarjeta->obtenerId();
-        $this->tipoTarjeta = $tarjeta->obtenerTipo();
+    /**
+     * Constructor de la clase que asigna los valores a las propiedades del objeto cuando se imprime un boleto
+     * 
+     * @param Colectivo_Interface $colectivo
+     *      El colectivo que imprimió el boleto
+     * @param Tarjeta_Interface $tarjeta
+     *      La tarjeta que pagó por el boleto
+     * 
+     * @return void
+     */
+    public function __construct( $colectivo, $tarjeta ) {
+        $this->valor = $tarjeta->obtener_valor();
+        $this->hora = $tarjeta->obtener_hora();
+        $this->id = $tarjeta->obtener_id();
+        $this->tipoTarjeta = $tarjeta->obtener_tipo();
         $this->linea = $colectivo->linea();
-        $this->saldo = $tarjeta->obtenerSaldo();
-        $this->canViajesplus = $tarjeta->obetenerPlus();
-        $this->costoTotal = $tarjeta->obtenerCosto();
+        $this->saldo = $tarjeta->obtener_saldo();
+        $this->cantidad_viajes_plus = $tarjeta->obtener_plus();
+        $this->costoTotal = $tarjeta->obtener_costo();
         $this->tipoBoleto = $tarjeta->caso;
-        $this->costoplus = $tarjeta->obtenerCostoPlus();
+        $this->costoplus = $tarjeta->obtener_costo_plus();
     }
 
-    public function obtenerValor() {
+    /**
+     * Devuelve el valor del boleto
+     * 
+     * @return float
+     */
+    public function obtener_valor() {
         return $this->valor;
     }
 
-    public function obtenerlinea() {
+    /**
+     * Devuelve la linea del colectivo que imprimió el boleto
+     * 
+     * @return string
+     */
+    public function obtener_linea() {
         return $this->linea;
     }
 
-    public function obtenerTarjetaId(){
+
+    /**
+     * Devuelve el id de la tarjeta que pago por el viaje
+     * 
+     * @return int
+     */
+    public function obtener_tarjeta_id() {
         return $this->id;
     }
 
-    public function obtenersaldo(){
+    /**
+     * Devuelve el saldo restante de la tarjeta que pago por el viaje
+     * 
+     * @return float
+     */
+    public function obtener_saldo() {
         return $this->saldo;
     }
 
-    public function obtenertipoTarjeta(){
+    /**
+     * Devuelve el tipo de la tarjeta que pago por el viaje
+     * 
+     * @return string
+     */
+    public function obtener_tipo_tarjeta() {
         return $this->tipoTarjeta;       
     }
 
-    public function obtenerhora(){
+    /**
+     * ???
+     */
+    public function obtener_hora() {
         return $this->hora;
     }
 
-    public function obtenerCostoTotal(){
+    /**
+     * Devuelve el costo total del viaje
+     * 
+     * @return float
+     */
+    public function obtener_costo_total() {
         return $this->costoTotal;
     }
 
-    public function obtenerTipoBoleto(){
+    /**
+     * Devuelve el tipo del boleto que fue impreso
+     * 
+     * @return string
+     */
+    public function obtener_tipo_boleto() {
         return $this->tipoBoleto;
     } 
-    public function obtenerCostoPlus(){
+
+    /**
+     * Devuelve el costo de pagar los viajes plus que se debian, si se debía ningun viaje plus devolverá 0
+     * 
+     * @return float
+     */
+    public function obtener_costo_plus() {
         return $this->costoplus;
+    }
+
+    /**
+     * Devuelve la cantidad de viajes plus restantes en la tarjeta que pagó por el viaje
+     * 
+     * @return int
+     */
+    public function obtener_cantidad_viajes_plus() {
+        return $this->cantidad_viajes_plus;
     }
 
 }

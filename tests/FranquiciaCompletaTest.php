@@ -4,17 +4,19 @@ namespace TrabajoTarjeta;
 
 use PHPUnit\Framework\TestCase;
 
-class FranquiciaCompletaTest extends TestCase {
+class Franquicia_Completa_Test extends TestCase {
 
     /**
-     * Comprueba que la Francuicia completa siempre pueda pagar.
+     * Comprueba que la franquicia completa siempre pueda pagar.
+     * 
+     * @return void
      */
-    public function testpagarmontoestandar() {
+    public function test_pagar_monto_estandar() {
         $tiempo = new Tiempo();
-        $fCompleta = new TarjetaFranquiciaCompleta($tiempo, null);
-        $colectivo = new Colectivo("mixta","103",420);
-        $this->assertEquals($colectivo->pagarCon($fCompleta), new Boleto($colectivo,$fCompleta));
-        $this->assertEquals($fCompleta->obtenerSaldo(),(0.0));
+        $franquicia_completa = new Tarjeta_Franquicia_Completa ( $tiempo, null );
+        $colectivo = new Colectivo( 'mixta', '103', 420 );
+        $this->assertEquals( $colectivo->pagar_con( $franquicia_completa ), new Boleto( $colectivo, $franquicia_completa ) );
+        $this->assertEquals( $franquicia_completa->obtener_saldo(), ( 0.0 ) );
     }
     
 }

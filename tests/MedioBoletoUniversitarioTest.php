@@ -4,80 +4,107 @@ namespace TrabajoTarjeta;
 
 use PHPUnit\Framework\TestCase;
 
-class MedioBoletoUniversitarioTest extends TestCase {
+class medio_boletoUniversitarioTest extends TestCase {
 
     /**
-     * Comprueba que el medio boleto page la mitad que una tarjeta normal en un pago estandar.
+     * Comprueba que el medio boleto universitario puede usar trasbordo y solo es valido hasta dos veces por dia.
+     * 
+     * @return void
      */
-    public function testmedioboletouniversitarioTiempo() {
-        $tiempo = new TiempoFalso();
-        $tiempo->avanzar(36000);
-        $medioboleto = new TarjetaMedioBoletoUniversitario($tiempo, null);
-        $colectivo = new Colectivo("mixta","103",420);
-        $colectivo2 = new Colectivo("mixta","102",421);
-        $medioboleto->recargar(50.0);
-        $medioboleto->pagarTarjeta($colectivo);
-        $this->assertEquals($medioboleto->obtenerCosto(), 7.40);
-        $tiempo->avanzar(300);
-        $medioboleto->pagarTarjeta($colectivo2);
-        $this->assertEquals($medioboleto->obtenerCosto(), 2.442);
-        $tiempo->avanzar(7200);
-        $medioboleto->pagarTarjeta($colectivo);
-        $this->assertEquals($medioboleto->obtenerCosto(), 14.80);
+    public function test_medio_boleto_universitario_tiempo() {
+        $tiempo = new Tiempo_Falso();
+        $tiempo->avanzar( 36000 );
+        $medio_boleto = new Tarjeta_Medio_Boleto_Universitario($tiempo, null);
+        $colectivo = new Colectivo( 'mixta', '103', 420 );
+        $colectivo2 = new Colectivo(  'mixta',  '102',  421 );
+        $medio_boleto->recargar( 50.0 );
+        $medio_boleto->pagar_tarjeta($colectivo);
+        $this->assertEquals( $medio_boleto->obtener_costo(), 7.40 );
+        $tiempo->avanzar( 300 );
+        $medio_boleto->pagar_tarjeta( $colectivo2 );
+        $this->assertEquals( $medio_boleto->obtener_costo(), 2.442 );
+        $tiempo->avanzar( 7200 );
+        $medio_boleto->pagar_tarjeta( $colectivo );
+        $this->assertEquals( $medio_boleto->obtener_costo(), 14.80 );
     }
-    public function testMedioboletoUniViajeplus(){
-        $tiempo = new TiempoFalso();
-        $tiempo->avanzar(36000);
-        $medioboleto = new TarjetaMedioBoletoUniversitario($tiempo, null);
-        $colectivo = new Colectivo("mixta","133",420);
-        $this->assertEquals($medioboleto->obetenerPlus(),2);
-        $medioboleto->pagarTarjeta($colectivo);
-        $this->assertEquals($medioboleto->obetenerPlus(),1);
-        $medioboleto->gastarPlus();
-        $this->assertEquals($medioboleto->obetenerPlus(),0);
-        $medioboleto->pagarTarjeta($colectivo);
-        $this->assertEquals($medioboleto->pagarTarjeta($colectivo),false);
+
+    /**
+     * Comprueba que el medio boleto universitario pueda usar hasta dos viajes plus
+     * 
+     * @return void
+     */
+    public function test_medio_boleto_un_viajeplus(){
+        $tiempo = new Tiempo_Falso();
+        $tiempo->avanzar( 36000 );
+        $medio_boleto = new Tarjeta_Medio_Boleto_Universitario( $tiempo, null );
+        $colectivo = new Colectivo( 'mixta', '133', 420 );
+        $this->assertEquals( $medio_boleto->obtener_plus(), 2 );
+        $medio_boleto->pagar_tarjeta($colectivo);
+        $this->assertEquals( $medio_boleto->obtener_plus(), 1 );
+        $medio_boleto->gastar_plus();
+        $this->assertEquals( $medio_boleto->obtener_plus() ,0 );
+        $medio_boleto->pagar_tarjeta( $colectivo );
+        $this->assertEquals( $medio_boleto->pagar_tarjeta( $colectivo ), false );
     }
-    public function testMedioboletotrasbordoNormal(){
-        $tiempo = new TiempoFalso();
-        $tiempo->avanzar(36000);
-        $medioboleto = new TarjetaMedioBoletoUniversitario($tiempo, null);
-        $colectivo = new Colectivo("mixta","133",420);
-        $colectivo2 = new Colectivo("mixta","102",421);
-        $medioboleto->recargar(50.0);
-        $medioboleto->pagarTarjeta($colectivo);
-        $this->assertEquals($medioboleto->obtenerCosto(), 7.40);
-        $tiempo->avanzar(300);
-        $medioboleto->pagarTarjeta($colectivo2);
-        $this->assertEquals($medioboleto->obtenerCosto(), 2.442);
+
+    /**
+     * Comprueba que el medio boleto universitario puede usar trasbordo
+     * 
+     * @return void
+     */
+
+    public function test_medio_boleto_trasbordo_normal(){
+        $tiempo = new Tiempo_Falso();
+        $tiempo->avanzar( 36000 );
+        $medio_boleto = new Tarjeta_Medio_Boleto_Universitario( $tiempo, null );
+        $colectivo = new Colectivo( 'mixta', '133', 420 );
+        $colectivo2 = new Colectivo(  'mixta',  '102',  421 );
+        $medio_boleto->recargar( 50.0 );
+        $medio_boleto->pagar_tarjeta( $colectivo );
+        $this->assertEquals( $medio_boleto->obtener_costo(), 7.40 );
+        $tiempo->avanzar( 300 );
+        $medio_boleto->pagar_tarjeta( $colectivo2 );
+        $this->assertEquals( $medio_boleto->obtener_costo(), 2.442 );
     }
-    public function testMedioboletotrasbordoCUVP(){
-        $tiempo = new TiempoFalso();
-        $tiempo->avanzar(36000);
-        $medioboleto = new TarjetaMedioBoletoUniversitario($tiempo, null);
-        $colectivo = new Colectivo("mixta","133",420);
-        $colectivo2 = new Colectivo("mixta","102",421);
-        $medioboleto->recargar(50.0);
-        $medioboleto->pagarTarjeta($colectivo);
-        $this->assertEquals($medioboleto->obtenerCosto(), 7.40);
-        $medioboleto->gastarPlus();
-        $tiempo->avanzar(300);
-        $medioboleto->pagarTarjeta($colectivo2);
-        $this->assertEquals($medioboleto->obtenerCosto(), 17.242);
+
+    /**
+     * Comprueba que el medio boleto universitario puede usar trasbordo con un viaje plus pero este no se ve afectado
+     * 
+     * @return void
+     */
+    public function test_medio_boleto_trasbordo_CUVP(){
+        $tiempo = new Tiempo_Falso();
+        $tiempo->avanzar( 36000 );
+        $medio_boleto = new Tarjeta_Medio_Boleto_Universitario( $tiempo, null );
+        $colectivo = new Colectivo( 'mixta', '133', 420 );
+        $colectivo2 = new Colectivo(  'mixta',  '102',  421 );
+        $medio_boleto->recargar( 50.0 );
+        $medio_boleto->pagar_tarjeta( $colectivo );
+        $this->assertEquals( $medio_boleto->obtener_costo(), 7.40 );
+        $medio_boleto->gastar_plus();
+        $tiempo->avanzar( 300 );
+        $medio_boleto->pagar_tarjeta( $colectivo2 );
+        $this->assertEquals( $medio_boleto->obtener_costo(), 17.242 );
     }
-    public function testMedioboletotrasbordoplus(){
-        $tiempo = new TiempoFalso();
-        $tiempo->avanzar(36000);
-        $medioboleto = new TarjetaMedioBoletoUniversitario($tiempo, null);
-        $colectivo = new Colectivo("mixta","133",420);
-        $colectivo2 = new Colectivo("mixta","102",421);
-        $medioboleto->recargar(50.0);
-        $medioboleto->pagarTarjeta($colectivo);
-        $this->assertEquals($medioboleto->obtenerCosto(), 7.40);
-        $medioboleto->gastarPlus();
-        $medioboleto->gastarPlus();
-        $tiempo->avanzar(300);
-        $medioboleto->pagarTarjeta($colectivo2);
-        $this->assertEquals($medioboleto->obtenerCosto(), 32.042);
+
+    /**
+     * Comprueba que el medio boleto universitario puede usar trasbordo con dos viajes plus pero estos no se ven afectados
+     * 
+     * @return void
+     */
+    public function test_medio_boleto_trasbordo_plus(){
+        $tiempo = new Tiempo_Falso();
+        $tiempo->avanzar( 36000 );
+        $medio_boleto = new Tarjeta_Medio_Boleto_Universitario( $tiempo, null );
+        $colectivo = new Colectivo( 'mixta', '133', 420 );
+        $colectivo2 = new Colectivo(  'mixta',  '102',  421 );
+        $medio_boleto->recargar( 50.0 );
+        $medio_boleto->pagar_tarjeta( $colectivo );
+        $this->assertEquals( $medio_boleto->obtener_costo(), 7.40 );
+        $medio_boleto->gastar_plus();
+        $medio_boleto->gastar_plus();
+        $tiempo->avanzar( 300 );
+        $medio_boleto->pagar_tarjeta( $colectivo2 );
+        $this->assertEquals( $medio_boleto->obtener_costo(), 32.042 );
     }
 }

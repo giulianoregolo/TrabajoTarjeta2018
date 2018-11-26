@@ -2,7 +2,7 @@
 
 namespace TrabajoTarjeta;
 
-interface ColectivoInterface {
+interface Colectivo_Interface {
 
     /**
      * Devuelve el nombre de la linea. Ejemplo '142 Negro'
@@ -34,6 +34,6 @@ interface ColectivoInterface {
      *  El boleto generado por el pago del viaje. O FALSE si no hay saldo
      *  suficiente en la tarjeta.
      */
-    public function pagarCon(TarjetaInterface $tarjeta);
+    public function pagar_con( Tarjeta_Interface $tarjeta );
 
 }
