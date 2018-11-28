@@ -4,6 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/giulianoregolo/TrabajoTarjeta2018/badge.svg?branch=master)](https://coveralls.io/github/giulianoregolo/TrabajoTarjeta2018?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/giulianoregolo/TrabajoTarjeta2018/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/giulianoregolo/TrabajoTarjeta2018/?branch=master)
 
+
 Trabajo Tarjeta: Versión 2018
 
 El siguiente trabajo es un enunciado iterativo. Todas las semanas nuevos requerimientos serán agregados y/o modificados para ilustrar la dinámica de desarrollo de software.
