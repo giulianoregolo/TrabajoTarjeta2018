@@ -126,6 +126,7 @@ class Tarjeta_Medio_Boleto_Universitario extends Tarjeta {
                     }
                 case 2:
                     if ( $this->hay_trans( $colectivo ) ) { 
+                        echo "\n";
                         $valor_aux = ($valor_aux * 33 ) / 100;
                         $this->costo = $this->costo_plus + $valor_aux;
                         $this->saldo = $this->saldo - $this->costo;
